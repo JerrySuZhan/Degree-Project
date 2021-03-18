@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User Profile</title>
+    <title>New House for Sale</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/styles.css" />
@@ -17,7 +17,7 @@
                     <div></div>
                 </div>
             </div>
-        </div>          
+        </div>
 
 
 
@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="uk-navbar-right">
-                    <ul class="uk-subnav uk-subnav-divider">
+                    <ul id="test" class="uk-subnav uk-subnav-divider">
                         <li class="uk-active"><a href="#">English</a></li>
                         <li><a href="#">简体中文</a></li>
                     </ul>
@@ -118,7 +118,6 @@
             </div>
         </div>
     </nav>
-
 </div>
 
 
@@ -157,11 +156,11 @@
     <div class="ev-container">
 
         <div class="uk-child-width-1-1 uk-child-width-1-2@s uk-flex uk-flex-middle uk-flex-center uk-grid-small" uk-grid>
-            <div class="uk-flex uk-flex-center uk-flex-left@s"><h5 class="title">User Profile</h5></div>
+            <div class="uk-flex uk-flex-center uk-flex-left@s"><h5 class="title">New for Sale</h5></div>
             <div>
                 <ul class="uk-breadcrumb uk-flex-center uk-flex-right@s">
-                    <li><a href="#">Home</a></li>
-                    <li class="uk-disabled"><a>User Profile</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="uk-disabled"><a>New for Sale</a></li>
                 </ul>
             </div>
         </div>
@@ -171,87 +170,22 @@
 
 <!-- END PAGE TITLE -->
 
-<!-- BREADCRUMBS -->
-
-<div class="ev-breadcrumbs">
-    <ul class="uk-breadcrumb">
-        <li><a href="#">Home</a></li>
-        <li class="uk-disabled"><a>User Profile</a></li>
-    </ul>
-</div>
-
-<!-- END BREADCRUMBS -->
-
-<!-- END PAGE TITLE -->
 
 
 <!-- PAGE CONTENT -->
 
 <div class="ev-page-container">
-    <div class="uk-grid-large" uk-grid>
-
-        <div class="uk-width-1-4@m">
-
-            <div class="uk-box-shadow-small uk-border-rounded uk-padding">
-
-                <div class="uk-block uk-margin-remove uk-text-center">
-                    <img class="uk-border-rounded uk-box-shadow-small uk-width-1-2" src="assets/img/avatar.png">
-
-                </div>
-
-                <div class="uk-margin uk-text-center">
-                    <p class="uk-text-bold uk-margin-remove">Your Name</p>
-                    <p class="uk-text-muted uk-text-small uk-margin-remove">Administrator</p>
-                </div>
-
-                <hr>
-
-                <ul class="uk-list ev-list uk-text-small">
-                    <li><a class="ev-link-secondary" href="profile.html">User Profile</a></li>
-                    <li><a class="ev-link-secondary" href="profile.html">Change Password</a></li>
-                </ul>
-
-                <hr>
-
-                <a class="uk-button uk-button-default uk-text-truncate uk-border-rounded uk-width-1-1"
-                ><i class="fas fa-lock uk-margin-small-right"></i> Log Out
-            </a>
-
-        </div>
-
-    </div>
 
     <div class="uk-width-expand@m">
 
-        <h5 class="uk-heading-line"><span>My Profile</span></h5>
+        <h5 class="uk-heading-line"><span>Basic Information</span></h5>
 
         <form class="uk-child-width-1-1 uk-child-width-1-2@s" uk-grid>
 
             <div>
-                <label class="uk-form-label" for="form-stacked-text">First Name</label>
+                <label class="uk-form-label" for="form-stacked-text">Community</label>
                 <div class="uk-form-controls">
-                    <input class="uk-input uk-border-rounded" type="text" value="">
-                </div>
-            </div>
-
-            <div>
-                <label class="uk-form-label" for="form-stacked-text">Last Name</label>
-                <div class="uk-form-controls">
-                    <input class="uk-input uk-border-rounded" type="text" value="">
-                </div>
-            </div>
-
-            <div>
-                <label class="uk-form-label" for="form-stacked-text">Phone</label>
-                <div class="uk-form-controls">
-                    <input class="uk-input uk-border-rounded" type="text" value="">
-                </div>
-            </div>
-
-            <div>
-                <label class="uk-form-label" for="form-stacked-text">Email</label>
-                <div class="uk-form-controls">
-                    <input class="uk-input uk-border-rounded" type="text" value="">
+                    <input class="uk-input uk-border-rounded" type="text" value="奥林匹克花园三期">
                 </div>
             </div>
 
@@ -280,23 +214,95 @@
             </div>
 
             <div>
-                <label class="uk-form-label" for="form-stacked-text">Adress</label>
+                <label class="uk-form-label" for="form-stacked-text">Area (sq.m.)</label>
                 <div class="uk-form-controls">
-                    <input class="uk-input uk-border-rounded" type="text" value="">
-                </div>
-            </div>
-
-            <div class="uk-width-1-1">
-                <label class="uk-form-label" for="form-stacked-text">About Me</label>
-                <div class="uk-form-controls">
-                    <textarea class="uk-textarea uk-border-rounded uk-padding-small" rows="5">Write more details about you</textarea>
+                    <input class="uk-input uk-border-rounded" type="number" value="100" min="1">
                 </div>
             </div>
 
             <div>
-                <button class="uk-button uk-button-primary uk-border-rounded" type="submit">Save Changes</button>
+                <label class="uk-form-label" for="form-stacked-text">Floor</label>
+                <div class="uk-form-controls">
+                    <select class="uk-input uk-border-rounded">
+                        <option>Ground</option>
+                        <option>Low</option>
+                        <option>Medium</option>
+                        <option>High</option>
+                        <option>Top</option>
+                    </select>
+                </div>
             </div>
 
+            <div>
+                <label class="uk-form-label" for="form-stacked-text">Bedroom Number</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input uk-border-rounded" type="number" value=3 min="1">
+                </div>
+            </div>
+
+            <div>
+                <label class="uk-form-label" for="form-stacked-text">Living Room Number</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input uk-border-rounded" type="number" value=1 min="1">
+                </div>
+            </div>
+
+            <div>
+                <label class="uk-form-label" for="form-stacked-text">Decoration Style</label>
+                <div class="uk-form-controls">
+                    <select class="uk-input uk-border-rounded">
+                        <option>Refined</option>
+                        <option>Simple</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="uk-form-label" for="form-stacked-text">Year</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input uk-border-rounded" type="number" value=2010 min="1700">
+                </div>
+            </div>
+
+        </form>
+
+        <br>
+
+        <h5 class="uk-heading-line"><span>Details</span></h5>
+        <form class="uk-child-width-1-1 uk-child-width-1-2@s" uk-grid>
+            <div class="uk-width-1-1">
+                <label class="uk-form-label" for="form-stacked-text">Description</label>
+                <div class="uk-form-controls">
+                    <textarea class="uk-textarea uk-border-rounded uk-padding-small" rows="4">This is a nice house...</textarea>
+                </div>
+            </div>
+
+            <div class="uk-width-1-1">
+                <label class="uk-form-label" for="form-stacked-text">Photos</label>
+                <div class="uk-form-controls">
+                    <input type="file" multiple class="uk-textarea uk-border-rounded uk-height-small uk-padding-small uk-width-1-2">
+                </div>
+            </div>
+        </form>
+
+        <br>
+
+        <h5 class="uk-heading-line"><span>Price Estimation</span></h5>
+        <form class="uk-child-width-1-1 uk-child-width-1-2@s" uk-grid>
+            <div class="uk-width-1-1">
+                <label class="uk-form-label" for="form-stacked-text">According to the information, we suggest you sell your house at the following price:</label>
+                <div class="uk-form-controls uk-width-1-2 uk-align-right"><br>
+                    <input class="uk-input uk-border-rounded uk-text-right"><br><br>
+                    <button class="uk-button uk-button-secondary uk-border-rounded uk-align-right">Estimate</button>
+                </div>
+            </div>
+            <div class="uk-width-1-1">
+                <label class="uk-form-label" for="form-stacked-text">Your Final Price:</label>
+                <div class="uk-form-controls uk-width-1-2 uk-align-right"><br>
+                    <input class="uk-input uk-border-rounded uk-text-right"><br><br>
+                    <button class="uk-button uk-border-rounded uk-align-right uk-button-primary"type="submit">Submit</button>
+                </div>
+            </div>
         </form>
 
     </div>
@@ -358,7 +364,7 @@
 
             </div>
         </div>
-    </div> 
+    </div>
 
 
     <div class="ev-copyright">
@@ -406,83 +412,20 @@
 
         <ul class="ev-main-menu uk-nav-default uk-nav-parent-icon uk-margin-small-bottom" uk-nav>
             <li>
-                <li class="uk-parent">
-                    <a href="#">Home</a>
-                    <ul class="uk-nav-sub">
-                        <li><a href="index.html">Home 1</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="index-2.html">Home 2</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="index-3.html">Home 3</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="index-4.html">Home 4</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="index-5.html">Home 5</a></li>
-                    </ul>
-                </li>
+                <a href="index.html">Home</a>
             </li>
             <li>
-                <li class="uk-parent">
-                    <a href="#">Listings</a>
-                    <ul class="uk-nav-sub">
-                        <li><a href="listing-1.html">Listing 1</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="listing-1-full.html">Listing 1 Full</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="listing-2.html">Listing 2</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="listing-2-full.html">Listing 2 Full</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="listing-3.html">Listing 3</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="listing-3-full.html">Listing 3 Full</a></li>
-                    </ul>
-                </li>
+                <a href="listing-1.html">Listings</a>
             </li>
             <li>
-                <li class="uk-parent">
-                    <a href="#">Single Property</a>
-                    <ul class="uk-nav-sub">
-                        <li><a href="single-property-1.html">Single Property 1</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="single-property-2.html">Single Property 2</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="single-property-3.html">Single Property 3</a></li>
-                    </ul>
-                </li>
-            </li>
-            <li>
-                <li class="uk-parent">
-                    <a href="#">Blog</a>
-                    <ul class="uk-nav-sub">
-                        <li><a href="blog-1.html">Blog 1</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="blog-1-full.html">Blog Full 1</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="blog-2.html">Blog 2</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="blog-2-full.html">Blog Full 2</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="blog-3.html">Blog 3</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="blog-3-full.html">Blog Full 3</a></li>
-                    </ul>
-                </li>
+                <a href="single-property-1.html">Single Property</a>
             </li>
             <li class="uk-parent">
                 <a href="#">Login</a>
                 <ul class="uk-nav-sub">
-                    <li><a href="login.html">Login 1</a></li>
+                    <li><a href="login.html">Login</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a href="login-2.html">Login 2</a></li>
-                    <li class="uk-nav-divider"></li>
-                    <li><a href="signup-1.html">Sign Up 1</a></li>
-                    <li class="uk-nav-divider"></li>
-                    <li><a href="signup-2.html">Sign Up 2</a></li>
-                    <li class="uk-nav-divider"></li>
-                    <li><a href="forgot.html">Forgot Pass 1</a></li>
-                    <li class="uk-nav-divider"></li>
-                    <li><a href="forgot.html">Forgot Pass 2</a></li>
+                    <li><a href="signup-1.html">Sign Up</a></li>
                 </ul>
             </li>
         </li>
@@ -526,6 +469,14 @@
 <script src="assets/js/daterangepicker.js"></script>
 <script src="assets/js/fontawesome.min.js"></script>
 <script src="assets/js/main.js"></script>
+<script>
+    $(function(){
+        $("#test li").click(function() {
+            $(this).siblings('li').removeClass('uk-active');
+            $(this).addClass('uk-active');
+        });
+    });
+</script>
 
 </body>
 </html>
