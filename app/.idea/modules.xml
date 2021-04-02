@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/microblog3.iml" filepath="$PROJECT_DIR$/.idea/microblog3.iml" />
+=======
+<<<<<<< HEAD:app/blogapp/.idea/modules.xml
+      <module fileurl="file://$PROJECT_DIR$/.idea/blogapp.iml" filepath="$PROJECT_DIR$/.idea/blogapp.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/app.iml" filepath="$PROJECT_DIR$/.idea/app.iml" />
+>>>>>>> fe73a04c32293b74486d3932457cbc5a8ea801b8:app/.idea/modules.xml
+>>>>>>> fe73a04c32293b74486d3932457cbc5a8ea801b8
     </modules>
   </component>
 </project>
