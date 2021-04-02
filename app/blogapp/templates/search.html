@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<form method="post" action="{{ url_for('search') }}">
+    <input type="text" name="content" id="content" placeholder="请输入搜索内容">
+    <input type="submit" value="搜索">
+</form>
+<div>
+    <table border="1px" cellspacing="0px">
+        {% for i in quotes%}
+            <tr>
+                <td>名字</td>
+                <td>{{ i.district }}</td>
+                <td>内容</td>
+                <td>{{ i.address }}</td>
+                <td>{{ i.total_price }}</td>
+                <td>{{ i.price_per_meter }}</td>
+                <td>{{ i.build_time }}</td>
+                <td>{{ i.num_of_bedrooms }}</td>
+                <td>{{ i.num_of_living_rooms }}</td>
+                <td>{{ i.size }}</td>
+                <td>{{ i.orientation }}</td>
+                <td>{{ i.building_type }}</td>
+                <td>{{ i.num_of_floors }}</td>
+
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>

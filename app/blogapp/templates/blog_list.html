@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<h2>学生信息</h2>
+{% for blog in blogs %}
+    学生编号：{{ blog.id }}<br>
+    学生姓名：{{ blog.district }}<br>
+    学生年龄：{{ blog.address }}<br>
+    <br>
+{% endfor %}
+
+当前页数：{{ pagination.page }}
+总页数：{{ pagination.pages }}
+一共有{{ pagination.total }}条数据
+
+
+{% import 'pages.html' as pg %}
+{{ pg.my_paginate(pagination,'blog_list') }}
+
+
+</body>
+</html>
