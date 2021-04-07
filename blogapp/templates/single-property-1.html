@@ -216,7 +216,7 @@
     <div class="ev-container">
 
         <div class="uk-child-width-1-1 uk-child-width-1-2@s uk-flex uk-flex-middle uk-flex-center uk-grid-small" uk-grid>
-            <div class="uk-flex uk-flex-center uk-flex-left@s"><h3 class="title">平乐园小区</h3></div>
+            <div class="uk-flex uk-flex-center uk-flex-left@s"><h3 class="title">{{ single_property.address }}</h3></div>
             <div>
                 <ul class="uk-breadcrumb uk-flex-center uk-flex-right@s">
                     <li><a href="/index">Home</a></li>
@@ -282,10 +282,10 @@
 
                 <hr>
 
-                <h3 class="ev-price">￥70000 <span>/ Per Sq.M.</span></h3>
+                <h3 class="ev-price">￥{{ single_property.price_per_meter }}<span>/ Per Sq.M.</span></h3>
 
-                <h3 class="ev-title">平乐园小区</h3>
-                <p class="ev-location"><i class="fas fa-map-marker-alt uk-margin-small-right"></i> Chaoyang</p>
+                <h3 class="ev-title">{{ single_property.address }}</h3>
+                <p class="ev-location"><i class="fas fa-map-marker-alt uk-margin-small-right"></i> {{ single_property.district }}</p>
 
 <!--                <hr>-->
 
@@ -336,13 +336,14 @@
                 <div class="uk-column-1-1 uk-column-1-2@s">
 
                     <ul class="uk-list uk-list-large ev-details-list">
-                        <li><span>Area:</span> 80 Sq.M.</li>
-                        <li><span>Floor:</span> Medium</li>
-                        <li><span>Bedrooms:</span> 2</li>
-                        <li><span>Living Room:</span> 1</li>
-                        <li><span>Decoration Style:</span> Simple</li>
-                        <li><span>Year:</span> 2000</li>
-
+                        <li><span>Area: </span> {{ single_property.size }} Sq.M.</li>
+                        <li><span>Floor: </span> {{ single_property.building_type }}</li>
+                        <li><span>Bedrooms: </span> {{ single_property.num_of_bedrooms }}</li>
+                        <li><span>Living Room: </span> {{ single_property.num_of_living_rooms }}</li>
+                        <li><span>orientation: </span> {{ single_property.orientation }}</li>
+                        <li><span>Year: </span> {{ single_property.build_time }}</li>
+                        <li><span>Total Price: </span> ￥{{ single_property.total_price }}</li>
+                        <li><span>Total Floors: </span> {{ single_property.num_of_floors }}</li>
 <!--                        <li><span>Condition:</span> New</li>-->
 <!--                        <li><span>Energy Rating:</span> <span class="rating rating-a">A</span></li>-->
 <!--                        <li><span>Perfomance:</span> 82 kWh/m²a</li>-->
