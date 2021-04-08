@@ -13,12 +13,10 @@ from flask_mail import Message
 import random
 import string
 
-app = Flask(__name__)
-app.config.from_object(Config)
-
-app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True  # root用户名123456密码 test数据库
-
-db.__init__(app)
+# app = Flask(__name__)
+# app.config.from_object(Config)
+# app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True  # root用户名123456密码 test数据库
+# db.__init__(app)
 
 
 @app.route('/')
@@ -33,7 +31,8 @@ def index():
     return render_template('index.html', title='Home', user=user)
 
 
-@app.route('/listing/<int:page><string:name><string:district><string:bedrooms><string:livingrooms><string:price_per_meter>',
+@app.route(
+    '/listing/<int:page><string:name><string:district><string:bedrooms><string:livingrooms><string:price_per_meter>',
     methods=['post', 'get'])
 def listing(page=None, name=None, district=None, bedrooms=None, livingrooms=None, price_per_meter=None):
     if not session.get("LOGING_USER") is None:
@@ -413,7 +412,7 @@ def forgot():
             Verification_code = str(captcha)
             e_body = 'Your veification code is ' + captcha + '. Please use this code to reset your password.'
             message = Message(subject='Verification Code', sender="zhangmengyi1999@126.com",
-                              recipients=[form.emailaddress.data], body=e_body)
+                              recipients=["suzhan38@126.com"], body=e_body)
             try:
                 mail.send(message)
                 return redirect(url_for('reset'))
