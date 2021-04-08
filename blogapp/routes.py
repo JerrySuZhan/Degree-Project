@@ -1,15 +1,17 @@
+import base64
 import os
+
 from sqlalchemy import or_, and_
 from werkzeug.security import check_password_hash, generate_password_hash
-from blogapp import app, db, models
+from blogapp import app, db, models, mail
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 from blogapp.config import Config
-from blogapp.models import Buildings, User
-import pymysql
-from flask_sqlalchemy import SQLAlchemy
-from flask_paginate import Pagination, get_page_parameter
+from blogapp.models import Buildings, User, Management
 from blogapp.forms import search_buildings, search_conditions, LoginForm, SignupForm, ProfileForm, \
-    ChangePasswordForm, AddHouseForm
+    ChangePasswordForm, AddHouseForm, SendEmailForm, VerifyAndResetForm
+from flask_mail import Message
+import random
+import string
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -32,7 +34,7 @@ def index():
 
 
 @app.route('/listing/<int:page><string:name><string:district><string:bedrooms><string:livingrooms><string:price_per_meter>',
-           methods=['post', 'get'])
+    methods=['post', 'get'])
 def listing(page=None, name=None, district=None, bedrooms=None, livingrooms=None, price_per_meter=None):
     if not session.get("LOGING_USER") is None:
 
@@ -91,7 +93,6 @@ def listing(page=None, name=None, district=None, bedrooms=None, livingrooms=None
                 price_per_meter_input = ""
                 session['price_per_meter'] = price_per_meter_input
 
-
             print("name1: " + session['name'])
             print("district1: " + session['district'])
             print("bedrooms1: " + session['bedrooms'])
@@ -116,9 +117,10 @@ def listing(page=None, name=None, district=None, bedrooms=None, livingrooms=None
                 and_(
                     Buildings.district.like("%" + district_input + "%") if district_input is not None else "",
                     Buildings.num_of_bedrooms.like("%" + bedrooms_input + "%") if bedrooms_input is not None else "",
-                    Buildings.num_of_living_rooms.like("%" + livingrooms_input + "%") if livingrooms_input is not None else "",
+                    Buildings.num_of_living_rooms.like(
+                        "%" + livingrooms_input + "%") if livingrooms_input is not None else "",
                     # Buildings.price_per_meter.like("%" + price_per_meter_input + "%") if price_per_meter_input is not None else ""
-            )
+                )
             )
             )
             u = u.paginate(page=page, per_page=18)
@@ -137,11 +139,13 @@ def listing(page=None, name=None, district=None, bedrooms=None, livingrooms=None
 
             return render_template('listing.html', u=u.items, pagination=u, search_input=search_input,
                                    district_input=district_input,
-                                   bedrooms_input=bedrooms_input, livingrooms_input=livingrooms_input, price_per_meter_input=price_per_meter_input)
+                                   bedrooms_input=bedrooms_input, livingrooms_input=livingrooms_input,
+                                   price_per_meter_input=price_per_meter_input)
 
         else:
             print("成功2")
-            if session['name'] == "" and session['district'] == "" and session['bedrooms'] == "" and session['livingrooms'] and session['price_per_meter']== "":
+            if session['name'] == "" and session['district'] == "" and session['bedrooms'] == "" and session[
+                'livingrooms'] and session['price_per_meter'] == "":
                 print("name: " + session['name'])
                 print("district: " + session['district'])
                 print("bedrooms: " + session['bedrooms'])
@@ -183,7 +187,8 @@ def listing(page=None, name=None, district=None, bedrooms=None, livingrooms=None
                         Buildings.price_per_meter.like("%" + search_input + "%") if search_input is not None else "",
                         Buildings.build_time.like("%" + search_input + "%") if search_input is not None else "",
                         Buildings.num_of_bedrooms.like("%" + search_input + "%") if search_input is not None else "",
-                        Buildings.num_of_living_rooms.like("%" + search_input + "%") if search_input is not None else "",
+                        Buildings.num_of_living_rooms.like(
+                            "%" + search_input + "%") if search_input is not None else "",
                         Buildings.size.like("%" + search_input + "%") if search_input is not None else "",
                         Buildings.orientation.like("%" + search_input + "%") if search_input is not None else "",
                         Buildings.building_type.like("%" + search_input + "%") if search_input is not None else "",
@@ -191,8 +196,10 @@ def listing(page=None, name=None, district=None, bedrooms=None, livingrooms=None
                     ),
                     and_(
                         Buildings.district.like("%" + district_input + "%") if district_input is not None else "",
-                        Buildings.num_of_bedrooms.like("%" + bedrooms_input + "%") if bedrooms_input is not None else "",
-                        Buildings.num_of_living_rooms.like("%" + livingrooms_input + "%") if livingrooms_input is not None else "",
+                        Buildings.num_of_bedrooms.like(
+                            "%" + bedrooms_input + "%") if bedrooms_input is not None else "",
+                        Buildings.num_of_living_rooms.like(
+                            "%" + livingrooms_input + "%") if livingrooms_input is not None else "",
                         # Buildings.price_per_meter.like("%" + price_per_meter_input + "%") if price_per_meter_input is not None else ""
                     )
                 )
@@ -213,7 +220,8 @@ def listing(page=None, name=None, district=None, bedrooms=None, livingrooms=None
             print("未进行search")
             return render_template('listing.html', u=u.items, pagination=u, search_input=search_input,
                                    district_input=district_input,
-                                   bedrooms_input=bedrooms_input, livingrooms_input=livingrooms_input, price_per_meter_input=price_per_meter_input)
+                                   bedrooms_input=bedrooms_input, livingrooms_input=livingrooms_input,
+                                   price_per_meter_input=price_per_meter_input)
 
     else:
         flash('User should login first!')
@@ -226,12 +234,11 @@ def listing(page=None, name=None, district=None, bedrooms=None, livingrooms=None
 def single(id=None):
     if not session.get("LOGING_USER") is None:
         single_property = Buildings.query.filter(Buildings.id == id).first()
-        return render_template('single-property-1.html', single_property = single_property)
+        return render_template('single-property-1.html', single_property=single_property)
 
     else:
         flash('User should login first!')
         return redirect(url_for('login'))
-
 
 
 @app.route('/new', methods=['GET', 'POST'])
@@ -240,13 +247,20 @@ def new():
         form = AddHouseForm()
         # if form.validate_on_submit():
         if request.method == 'POST':
-            building = Buildings(district=form.district.data, address=form.address.data, total_price=form.total_price.data,
-                                 price_per_meter=form.total_price.data * 10000 / form.size.data, build_time=form.year.data,
+            building = Buildings(district=form.district.data, address=form.address.data,
+                                 total_price=form.total_price.data,
+                                 price_per_meter=form.total_price.data * 10000 / form.size.data,
+                                 build_time=form.year.data,
                                  num_of_bedrooms=form.bedroom_number.data,
                                  num_of_living_rooms=form.livingroom_number.data, size=form.size.data,
                                  orientation=form.orientation.data,
                                  building_type=form.floor_range.data, num_of_floors=form.floor_number.data)
             db.session.add(building)
+            db.session.commit()
+
+            user = User.query.filter(User.id == session.get("LOGING_USER")['userid']).first()
+            management = Management(user_id=user.id, house_id=building.id)
+            db.session.add(management)
             db.session.commit()
             return redirect(url_for('index'))
     else:
@@ -295,7 +309,8 @@ def signup():
                     flash('User already exist!')
                     return redirect(url_for('signup'))
             passw_hash = generate_password_hash(form.password.data)
-            user = User(username=form.username.data, email=form.email.data, password_hash=passw_hash, first_name=None, last_name=None, phone=None, district=None, address=None)
+            user = User(username=form.username.data, email=form.email.data, password_hash=passw_hash, first_name=None,
+                        last_name=None, phone=None, district=None, address=None)
             db.session.add(user)
             db.session.commit()
             flash('User registered with username:{}'.format(form.username.data))
@@ -304,36 +319,65 @@ def signup():
     return render_template('signup.html', title='Register a new user', form=form, loginUser=loginUser)
 
 
-@app.route('/profile',methods=['GET','POST'])
+@app.route('/profile', methods=['GET', 'POST'])
 def profile():
-    form=ProfileForm()
+    form = ProfileForm()
     if not session.get("LOGING_USER") is None:
-        user=User.query.filter(User.id==session.get("LOGING_USER")['userid']).first()
-        print("4321")
-        if form.validate_on_submit():
-            print("1231")
-            photo_dir=Config.PHOTO_UPLOAD_DIR
-            photo_obj=form.photo.data
-            format=photo_obj.filename.rsplit('.', photo_obj.filename.count('.'))[-1]
-            photo_filename=user.username+'.'+format
-            photo_obj.save(os.path.join(photo_dir,photo_filename))
-            user.first_name=form.first_name.data
-            user.last_name=form.last_name.data
-            user.phone=form.phone.data
-            user.district = form.district.data
-            user.address=form.address.data
-            user.photo=photo_filename
+        user = User.query.filter(User.id == session.get("LOGING_USER")['userid']).first()
+        if not user.photo:
+            print('photo is None')
+            user.photo = "Admin.jpg"
             db.session.commit()
-        return render_template('profile-new.html',form=form,user=user)
+
+        if form.validate_on_submit():
+            if form.photo.data:
+                photo_dir = Config.PHOTO_UPLOAD_DIR
+                photo_obj = form.photo.data
+                format = photo_obj.filename.rsplit('.', photo_obj.filename.count('.'))[-1]
+                photo_filename = user.username + '.' + format
+                photo_obj.save(os.path.join(photo_dir, photo_filename))
+                user.photo = photo_filename
+            else:
+                user.photo = user.photo
+
+            if form.phone.data:
+                user.phone = form.phone.data
+            else:
+                user.phone = user.phone
+
+            if form.first_name.data:
+                user.first_name = form.first_name.data
+            else:
+                user.first_name = user.first_name
+
+            if form.last_name.data:
+                user.last_name = form.last_name.data
+            else:
+                user.last_name = user.last_name
+
+            if form.district.data:
+                user.district = form.district.data
+            else:
+                user.district = user.district
+
+            if form.address.data:
+                user.address = form.address.data
+            else:
+                user.address = user.address
+
+            db.session.commit()
+
+        return render_template('profile-new.html', form=form, user=user)
     else:
         flash('User should login first!')
         return redirect(url_for('login'))
 
-@app.route('/changepassword' ,methods=['GET','POST'])
+
+@app.route('/changepassword', methods=['GET', 'POST'])
 def change():
     loginUser = session.get('LOGING_USER')
     form = ChangePasswordForm()
-    user = User.query.filter(User.id==session.get('LOGING_USER')['userid']).first()
+    user = User.query.filter(User.id == session.get('LOGING_USER')['userid']).first()
     if form.validate_on_submit():
         if (check_password_hash(user.password_hash, form.old_password.data)):
             if form.new_password.data != form.new_password2.data:
@@ -341,25 +385,84 @@ def change():
                 return redirect(url_for('change'))
             else:
                 passw_hash = generate_password_hash(form.new_password.data)
-                user.password_hash=passw_hash
+                user.password_hash = passw_hash
                 db.session.commit()
                 flash('Password Successfully Changed!')
                 return redirect(url_for('profile'))
         else:
             flash('Incorrect Password!')
             return redirect(url_for('change'))
-    return render_template('change-password.html',form=form)
+    return render_template('change-password.html', form=form)
 
-@app.route('/forgot')
+
+@app.route('/forgot1', methods=['GET', 'POST'])
 def forgot():
-    return render_template('forgot.html')
+    form = SendEmailForm()
+    global email_for_verify
+    if form.validate_on_submit():
+        user_in_db = User.query.filter(User.email == form.emailaddress.data).first()
+        if not user_in_db:
+            flash('No user found with email: {}'.format(form.emailaddress.data))
+        else:
+            email_for_verify = user_in_db.email
+            source = list(string.ascii_letters)
+            source.extend(map(lambda x: str(x), range(0, 10)))
+            captcha = "".join(random.sample(source, 6))
+            print(captcha)
+            global Verification_code
+            Verification_code = str(captcha)
+            e_body = 'Your veification code is ' + captcha + '. Please use this code to reset your password.'
+            message = Message(subject='Verification Code', sender="zhangmengyi1999@126.com",
+                              recipients=[form.emailaddress.data], body=e_body)
+            try:
+                mail.send(message)
+                return redirect(url_for('reset'))
+            except:
+                flash("server error, unable to send verification message, please try again later")
+
+    return render_template('forgot.html', form=form)
+
+
+@app.route('/forgot2', methods=['GET', 'POST'])
+def reset():
+    form = VerifyAndResetForm()
+    if form.validate_on_submit():
+        if form.v_code.data != Verification_code:
+            flash('Wrong Verification Code!')
+        else:
+            if form.new_password.data != form.new_password2.data:
+                flash('Passwords do not match')
+            else:
+                user_for_verify = User.query.filter(User.email == email_for_verify).first()
+                passw_hash = generate_password_hash(form.new_password.data)
+                user_for_verify.password_hash = passw_hash
+                db.session.commit()
+                return redirect(url_for('login'))
+    return render_template('forgot-reset.html', form=form)
+
 
 @app.route('/logout')
 def logout():
-    session.pop("LOGING_USER",None)
+    session.pop("LOGING_USER", None)
     return redirect(url_for('login'))
+
+
+@app.route('/management', methods=['GET', 'POST'])
+def management():
+    if not session.get("LOGING_USER") is None:
+        # user=User.query.filter(User.id==session.get("LOGING_USER")['userid']).first()
+        management = Management.query.filter(Management.user_id == session.get("LOGING_USER")['userid'])
+        houses = []
+        for i in management:
+            house = Buildings.query.filter(i.house_id == Buildings.id).first()
+            houses.append(house)
+
+        return render_template('management.html', houses=houses)
+
+    else:
+        flash('User should login first!')
+        return redirect(url_for('login'))
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-

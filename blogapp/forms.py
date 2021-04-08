@@ -25,23 +25,22 @@ class SignupForm(FlaskForm):
 
 
 class ProfileForm(FlaskForm):
-    first_name = StringField('First Name', validators=[DataRequired()])
-    last_name = StringField('Last Name', validators=[DataRequired()])
-    phone = StringField('Phone', validators=[DataRequired()])
+    first_name = StringField('First Name')
+    last_name = StringField('Last Name')
+    phone = StringField('Phone')
     # email = StringField('Email', validators=[DataRequired()])
-    # district = SelectField('District', validators=[DataRequired()], choices=['Haidian', 'Chaoyang', 'Fengtai', 'Mentougou', 'Shijingshan', 'Fangshan', 'Tongzhou', 'Shunyi', 'Changping', 'Daxing', 'Huairou', 'Pinggu', 'Yanqing', 'Miyun', 'Xicheng','Dongcheng'])
-    district = SelectField('District', validators=[DataRequired()], coerce=str,
-                           choices=[('Dongcheng', 'Dongcheng'), ('Xicheng', 'Xicheng'),
-                                    ('Chaoyang', 'Chaoyang'), ('Haidian', 'Haidian'),
-                                    ('Tongzhou', 'Tongzhou'), ('Changping', 'Changping'),
-                                    ('Huairou', 'Huairou'), ('Miyun', 'Miyun'),
-                                    ('Mentougou', 'Mentougou'), ('Fengtai', 'Fengtai'),
-                                    ('Shijingshan', 'Shijingshan'), ('Fangshan', 'Fangshan'),
-                                    ('Shunyi', 'Shunyi'), ('Daxing', 'Daxing'),
-                                    ('Yanqing', 'Yanqing'), ('Pinggu', 'Pinggu')
+    district = SelectField('District', coerce=str,
+                           choices=[('东城', '东城'), ('西城', '西城'),
+                                    ('朝阳', '朝阳'), ('海淀', '海淀'),
+                                    ('通州', '通州'), ('昌平', '昌平'),
+                                    ('怀柔', '怀柔'), ('密云', '密云'),
+                                    ('门头沟', '门头沟'), ('丰台', '丰台'),
+                                    ('石景山', '石景山'), ('房山', '房山'),
+                                    ('顺义', '顺义'), ('大兴', '大兴'),
+                                    ('延庆', '延庆'), ('平谷', '平谷')
                                     ])
-    address = StringField('Address', validators=[DataRequired()])
-    photo = FileField('Photo', validators=[FileRequired(),FileAllowed(['jpg','jpeg','png'])])
+    address = StringField('Address')
+    photo = FileField('Photo', validators=[FileAllowed(['jpg','jpeg','png'])])
     submit = SubmitField('Save Changes')
 
 class ChangePasswordForm(FlaskForm):
@@ -51,26 +50,26 @@ class ChangePasswordForm(FlaskForm):
     submit = SubmitField('Save Changes')
 
 class AddHouseForm(FlaskForm):
-    district = SelectField('District', validators=[DataRequired()], coerce=str, choices=[('Dongcheng', 'Dongcheng'), ('Xicheng', 'Xicheng'),
-                                                                           ('Chaoyang', 'Chaoyang'), ('Haidian', 'Haidian'),
-                                                                           ('Tongzhou', 'Tongzhou'), ('Changping', 'Changping'),
-                                                                           ('Huairou', 'Huairou'), ('Miyun', 'Miyun'),
-                                                                           ('Mentougou', 'Mentougou'), ('Fengtai', 'Fengtai'),
-                                                                           ('Shijingshan', 'Shijingshan'), ('Fangshan', 'Fangshan'),
-                                                                           ('Shunyi', 'Shunyi'), ('Daxing', 'Daxing'),
-                                                                           ('Yanqing', 'Yanqing'), ('Pinggu', 'Pinggu')
+    district = SelectField('District', validators=[DataRequired()], coerce=str, choices=[('东城', '东城'), ('西城', '西城'),
+                                                                           ('朝阳', '朝阳'), ('海淀', '海淀'),
+                                                                           ('通州', '通州'), ('昌平', '昌平'),
+                                                                           ('怀柔', '怀柔'), ('密云', '密云'),
+                                                                           ('门头沟', '门头沟'), ('丰台', '丰台'),
+                                                                           ('石景山', '石景山'), ('房山', '房山'),
+                                                                           ('顺义', '顺义'), ('大兴', '大兴'),
+                                                                           ('延庆', '延庆'), ('平谷', '平谷')
                                                                            ])
     address = StringField('Address', validators=[DataRequired()])
     size = IntegerField('Size', validators=[DataRequired()])
-    floor_range = SelectField('Floor Range', validators=[DataRequired()], coerce=str, choices=[('Ground', 'Ground'), ('Low', 'Low'),
-                                                                                 ('Medium', 'Medium'), ('High', 'High'),
-                                                                                 ('Top', 'Top')
+    floor_range = SelectField('Floor Range', validators=[DataRequired()], coerce=str, choices=[('低楼层', '低楼层'), ('中楼层', '中楼层'),
+                                                                                 ('高楼层', '高楼层'), ('顶层', '顶层'),
+                                                                                 ('底层', '底层')
                                                                                  ])
     floor_number = StringField('Floor Number', validators=[DataRequired()])
     bedroom_number = IntegerField('Bedroom Number', validators=[DataRequired()])
     livingroom_number = IntegerField('Living Room Number', validators=[DataRequired()])
-    orientation = SelectField('Orientation', validators=[DataRequired()], coerce=str, choices=[('North', 'North'), ('South', 'South'),
-                                                                                 ('East', 'East'), ('West', 'West')])
+    orientation = SelectField('Orientation', validators=[DataRequired()], coerce=str, choices=[('南', '南'), ('北', '北'),
+                                                                                 ('东', '东'), ('西', '西'), ('西北', '西北'), ('西南', '西南'), ('东南', '东南'), ('东北', '东北')])
     year = IntegerField('Year', validators=[DataRequired()])
     total_price = IntegerField('Total Price', validators=[DataRequired()])
     submit = SubmitField('Submit')
@@ -91,3 +90,13 @@ class search_buildings(FlaskForm):
 
 class search_conditions(FlaskForm):
     submit = SubmitField()
+
+class SendEmailForm(FlaskForm):
+    emailaddress = StringField(' ', validators=[DataRequired()])
+    submit = SubmitField('Send')
+
+class VerifyAndResetForm(FlaskForm):
+    v_code = StringField(' ', validators=[DataRequired()])
+    new_password = PasswordField(' ', validators=[DataRequired()])
+    new_password2 = PasswordField(' ', validators=[DataRequired()])
+    submit = SubmitField('Reset')

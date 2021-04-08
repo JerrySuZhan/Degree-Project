@@ -25,7 +25,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(128))
     first_name = db.Column(db.String(50))
     last_name = db.Column(db.String(50))
-    phone = db.Column(db.Integer)
+    phone = db.Column(db.String(50))
     district = db.Column(db.String(150))
     address = db.Column(db.String(1200))
     photo = db.Column(db.String(256))
@@ -33,5 +33,7 @@ class User(db.Model):
     # def __repr__(self):
     #     return '<User {}>'.format(self.username)
 
-
-
+class Management(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    house_id = db.Column(db.Integer)

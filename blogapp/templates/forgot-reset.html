@@ -34,21 +34,37 @@
 
             <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
-                <p>
-                    {{ form.emailaddress.label }}<br>
-                    {{ form.emailaddress(class="uk-input uk-border-pill",placeholder="Email") }}
 
-			        {% for error in form.emailaddress.errors %}
+                <p>
+                    {{ form.v_code(class="uk-input uk-border-pill",placeholder="Verification Code") }}
+
+			        {% for error in form.v_code.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}
                 </p>
 
+                <p>
+                    {{ form.new_password(class="uk-input uk-border-pill",placeholder="New Password") }}
+
+			        {% for error in form.new_password.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+
+                <p>
+                    {{ form.new_password2(class="uk-input uk-border-pill",placeholder="Confirm New Password") }}
+
+			        {% for error in form.new_password2.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
 
                 <p>{{ form.submit(class="uk-button uk-width-1-1 uk-border-pill") }}</p>
 
-
+                <div class="uk-margin uk-width-1-1 uk-text-small">
+                    Back to <a class="ev-link-primary uk-text-bold" href="/login">Sign In</a>
+                </div>
             </form>
-
 
         </div>
 
