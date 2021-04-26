@@ -9,6 +9,7 @@
     <script src="../static/assets/js/uikit.min.js"></script>
     <script src="../static/assets/js/uikit-icons.min.js"></script>
 </head>
+
 <body>
         <div id="preloader">
             <div class="spinner">
@@ -70,86 +71,23 @@
                 <ul class="uk-navbar-nav">
                     <li>
                         <a href="/index">Home <span class="uk-margin-small-left" ></span></a>
-<!--                        <div class="uk-navbar-dropdown">-->
-<!--                            <ul class="uk-nav uk-navbar-dropdown-nav">-->
-<!--                                <li><a href="index.html">Home</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="index-2.html">Home 2</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="index-3.html">Home 3</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="index-4.html">Home 4</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="index-5.html">Home 5</a></li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
                     </li>
                     <li>
                         <a href="/listing/1nullnullnullnull">Listings <span class="uk-margin-small-left" ></span></a>
-<!--                        <div class="uk-navbar-dropdown">-->
-<!--                            <ul class="uk-nav uk-navbar-dropdown-nav">-->
-<!--                                <li><a href="listing-1.html">Listing 1</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="listing-1-full.html">Listing 1 Full</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="listing-2.html">Listing 2</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="listing-2-full.html">Listing 2 Full</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="listing-3.html">Listing 3</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="listing-3-full.html">Listing 3 Full</a></li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
                     </li>
-{#                    <li>#}
-{#                        <a href="/single">Single Property <span class="uk-margin-small-left" ></span></a>#}
-{#<!--                        <div class="uk-navbar-dropdown">-->#}
-{#<!--                            <ul class="uk-nav uk-navbar-dropdown-nav">-->#}
-{#<!--                                <li><a href="single-property-1.html">Single Property 1</a></li>-->#}
-{#<!--                                <li class="uk-nav-divider"></li>-->#}
-{#<!--                                <li><a href="single-property-2.html">Single Property 2</a></li>-->#}
-{#<!--                                <li class="uk-nav-divider"></li>-->#}
-{#<!--                                <li><a href="single-property-3.html">Single Property 3</a></li>-->#}
-{#<!--                            </ul>-->#}
-{#<!--                        </div>-->#}
-{#                    </li>#}
                      <li>
                         <a href="/new">New for Sale <span class="uk-margin-small-left"></span></a>
                     </li>
-<!--                    <li>-->
-<!--                        <a href="#">Blog <span class="uk-margin-small-left" uk-icon="icon: chevron-down"></span></a>-->
-<!--                        <div class="uk-navbar-dropdown">-->
-<!--                            <ul class="uk-nav uk-navbar-dropdown-nav">-->
-<!--                                <li><a href="blog-1.html">Blog 1</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="blog-1-full.html">Blog Full 1</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="blog-2.html">Blog 2</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="blog-2-full.html">Blog Full 2</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="blog-3.html">Blog 3</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="blog-3-full.html">Blog Full 3</a></li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-<!--                    </li>-->
+                    <li>
+                        <a href="/management/1"> My Houses <span class="uk-margin-small-left"></span></a>
+                    </li>
                     <li>
                         <a href="#">Login<span class="uk-margin-small-left" uk-icon="icon: chevron-down"></span></a>
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li><a href="/login">Login </a></li>
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="login-2.html">Login 2</a></li>-->
                                 <li class="uk-nav-divider"></li>
                                 <li><a href="/signup">Sign Up </a></li>
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="signup-2.html">Sign Up 2</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="forgot-2.html">Forgot Pass 1</a></li>-->
-<!--                                <li class="uk-nav-divider"></li>-->
-<!--                                <li><a href="forgot-2.html">Forgot Pass 2</a></li>-->
                             </ul>
                         </div>
                     </li>
@@ -532,113 +470,39 @@
     <div class="ev-property-widget">
         <h5 class="ev-title uk-heading-line"><span>Make An Appointment</span></h5>
 
-        <form class="uk-grid-small" uk-grid>
-
+        <form method="post" class="uk-grid-small" uk-grid action="" enctype="multipart/form-data" novalidate>
+            {{ form.hidden_tag() }}
             <div class="uk-width-1-1">
                 <div class="uk-margin">
                     <div class="uk-width-1-1 uk-inline">
-                        <span class="uk-form-icon" uk-icon="icon: user"></span>
-                        <input class="uk-input uk-form-large" placeholder="Name" type="text">
+                        <h>
+                            Do you like this house?
+                            <br><br>
+                            Click the button below to let the owner know.
+                            <br><br>
+                            The house owner will get your contact information then,
+                            <br><br>
+                            and contact with you to discuss the deal.
+                            <br>
+                        </h>
+
                     </div>
                 </div>
             </div>
-
             <div class="uk-width-1-1">
                 <div class="uk-margin">
-                    <div class="uk-width-1-1 uk-inline">
-                        <span class="uk-form-icon" uk-icon="icon: mail"></span>
-                        <input class="uk-input uk-form-large" placeholder="Email" type="email">
-                    </div>
+                    {{ form.content(size=35,class="uk-input uk-border-pill",placeholder="Message") }}
                 </div>
             </div>
-
             <div class="uk-width-1-1">
                 <div class="uk-margin">
-                    <div class="uk-width-1-1 uk-inline">
-                        <span class="uk-form-icon" uk-icon="icon: receiver"></span>
-                        <input class="uk-input uk-form-large" placeholder="Phone" type="number">
-                    </div>
-                </div>
-            </div>
-
-            <div class="uk-width-1-1">
-                <div class="uk-margin">
-                    <div class="uk-width-1-1 uk-inline">
-                        <span class="uk-form-icon" uk-icon="icon: calendar"></span>
-                        <input class="uk-input uk-form-large" placeholder="Date" name="date" type="text">
-                    </div>
-                </div>
-            </div>
-
-            <div class="uk-width-1-1">
-                <textarea class="uk-textarea uk-form-large" rows="3" placeholder="Message">I'm interested in this property [ID 1006] and I'd like to know more details.</textarea>
-            </div>
-
-            <div class="uk-width-1-1">
-                <div class="uk-margin">
-                    <button class="uk-button uk-button-primary uk-border-rounded uk-width-1-1" type="submit">Send Message <i class="fas fa-angle-right uk-margin-small-left"></i></button>
+                    {{form.submit(class="uk-button uk-button-primary uk-border-rounded uk-width-1-1",type="submit")}}
                 </div>
             </div>
 
         </form>
 
     </div>
-
-
-<!--    <div class="ev-property-widget">-->
-<!--        <div>-->
-<!--            <h5 class="ev-title uk-heading-line"><span>Mortgage Calculator</span></h5>-->
-
-<!--            <div class="uk-grid-small" uk-grid>-->
-
-<!--                <div class="uk-width-1-1">-->
-<!--                    <div class="uk-margin">-->
-<!--                        <div class="uk-width-1-1 uk-inline">-->
-<!--                            <input class="uk-input uk-form-large" id="inCost" placeholder="Cost of House" type="text">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="uk-width-1-1">-->
-<!--                    <div class="uk-margin">-->
-<!--                        <div class="uk-width-1-1 uk-inline">-->
-<!--                            <input class="uk-input uk-form-large" id="inDown" placeholder="Down Payment" type="text">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="uk-width-1-1">-->
-<!--                    <div class="uk-margin">-->
-<!--                        <div class="uk-width-1-1 uk-inline">-->
-<!--                            <input class="uk-input uk-form-large" id="inAPR" placeholder="APR (Interest)" type="text">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="uk-width-1-1">-->
-<!--                    <div class="uk-margin">-->
-<!--                        <div class="uk-width-1-1 uk-inline">-->
-<!--                            <input class="uk-input uk-form-large" id="inPeriod" placeholder="Period (How Long)" type="text">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="uk-width-1-1">-->
-<!--                    <div class="uk-margin">-->
-<!--                        <button class="uk-button uk-button-primary uk-border-rounded uk-width-1-1" id="btnCalculate">Calculate <i class="fas fa-angle-right uk-margin-small-left"></i></button>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="uk-width-1-1 uk-text-center" id="inResults">-->
-<!--                    <div class="uk-animation-fade">-->
-<!--                        <p class="uk-margin-remove">Montly Payment: <span class="uk-text-bold">$<span id="outMontly"></span></span></p>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--            </div>-->
-
-<!--        </div>-->
-<!--    </div>-->
 
 </div>
 

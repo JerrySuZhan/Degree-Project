@@ -6,9 +6,9 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from blogapp import app, db, models, mail
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 from blogapp.config import Config
-from blogapp.models import Buildings, User, Management
+from blogapp.models import Buildings, User, Message
 from blogapp.forms import search_buildings, search_conditions, LoginForm, SignupForm, ProfileForm, \
-    ChangePasswordForm, AddHouseForm, SendEmailForm, VerifyAndResetForm
+    ChangePasswordForm, AddHouseForm, SendEmailForm, VerifyAndResetForm, SingleForm
 from flask_mail import Message
 import random
 import string
@@ -232,20 +232,57 @@ def listing(page=None, name=None, district=None, bedrooms=None, livingrooms=None
 @app.route('/single/<int:id>', methods=['GET', 'POST'])
 def single(id=None):
     if not session.get("LOGING_USER") is None:
+        form = SingleForm()
         single_property = Buildings.query.filter(Buildings.id == id).first()
-        return render_template('single-property-1.html', single_property=single_property)
+        if form.validate_on_submit():
+            user_id = session.get("LOGING_USER")['userid']
+            house_id = id
+            exist=0
+            message_all = models.Message.query.all();
+            for m in message_all:
+                if user_id==m.user_id and house_id==m.house_id:
+                    exist=1
+            if exist==0:
+                message = models.Message(user_id=user_id, house_id=house_id, content=form.content.data)
+                db.session.add(message)
+                db.session.commit()
+            # return redirect('single-property-1.html', single_property=single_property, form=form)
+        return render_template('single-property-1.html', single_property=single_property, form=form)
+    else:
+        flash('User should login first!')
+        return redirect(url_for('login'))
+
+@app.route('/message/<int:id>', methods=['GET', 'POST'])
+def single_for_message(id=None):
+    if not session.get("LOGING_USER") is None:
+        single_property = Buildings.query.filter(Buildings.id == id).first()
+        message_all=models.Message.query.filter(models.Message.house_id == id)
+        potential_users={}
+        for message in message_all:
+            potential_user=User.query.filter(User.id==message.user_id).first()
+            m=message.content
+            potential_users[potential_user]=m
+        # print(potential_users)
+        return render_template('messages.html', single_property=single_property, potential_users=potential_users)
 
     else:
         flash('User should login first!')
         return redirect(url_for('login'))
 
-
 @app.route('/new', methods=['GET', 'POST'])
 def new():
     if not session.get("LOGING_USER") is None:
         form = AddHouseForm()
-        # if form.validate_on_submit():
-        if request.method == 'POST':
+        photo_filename = "fp1.jpg"
+        if form.validate_on_submit():
+            if form.photo.data:
+                photo_dir = Config.PHOTO_BUILDING_DIR
+                photo_obj = form.photo.data
+                format = photo_obj.filename.rsplit('.', photo_obj.filename.count('.'))[-1]
+                photo_filename = form.address.data + '.' + format
+                photo_obj.save(os.path.join(photo_dir, photo_filename))
+            else:
+                photo_filename = photo_filename
             building = Buildings(district=form.district.data, address=form.address.data,
                                  total_price=form.total_price.data,
                                  price_per_meter=form.total_price.data * 10000 / form.size.data,
@@ -253,15 +290,12 @@ def new():
                                  num_of_bedrooms=form.bedroom_number.data,
                                  num_of_living_rooms=form.livingroom_number.data, size=form.size.data,
                                  orientation=form.orientation.data,
-                                 building_type=form.floor_range.data, num_of_floors=form.floor_number.data)
+                                 building_type=form.floor_range.data, num_of_floors=form.floor_number.data,
+                                 detail=form.detail.data, photo=photo_filename, owner_id=session.get('LOGING_USER')["userid"])
+
             db.session.add(building)
             db.session.commit()
-
-            user = User.query.filter(User.id == session.get("LOGING_USER")['userid']).first()
-            management = Management(user_id=user.id, house_id=building.id)
-            db.session.add(management)
-            db.session.commit()
-            return redirect(url_for('index'))
+            return render_template('index.html')
     else:
         flash('User should login first!')
         return redirect(url_for('login'))
@@ -412,7 +446,7 @@ def forgot():
             Verification_code = str(captcha)
             e_body = 'Your veification code is ' + captcha + '. Please use this code to reset your password.'
             message = Message(subject='Verification Code', sender="zhangmengyi1999@126.com",
-                              recipients=["suzhan38@126.com"], body=e_body)
+                              recipients=[email_for_verify], body=e_body)
             try:
                 mail.send(message)
                 return redirect(url_for('reset'))
@@ -445,18 +479,25 @@ def logout():
     session.pop("LOGING_USER", None)
     return redirect(url_for('login'))
 
+# @app.route('/message', methods=['GET', 'POST'])
+# def message():
+#     user_id = session.get("LOGING_USER")['userid']
+#     print(user_id)
+#     return redirect(url_for('single'))
 
-@app.route('/management', methods=['GET', 'POST'])
-def management():
+@app.route('/management/<int:page>', methods=['GET', 'POST'])
+def management(page=None):
     if not session.get("LOGING_USER") is None:
+        if not page:
+            page = 1
         # user=User.query.filter(User.id==session.get("LOGING_USER")['userid']).first()
-        management = Management.query.filter(Management.user_id == session.get("LOGING_USER")['userid'])
-        houses = []
-        for i in management:
-            house = Buildings.query.filter(i.house_id == Buildings.id).first()
-            houses.append(house)
-
-        return render_template('management.html', houses=houses)
+        houses = Buildings.query.filter(Buildings.owner_id == session.get("LOGING_USER")['userid'])
+        # houses = []
+        # for i in management:
+        #     house = Buildings.query.filter(i.house_id == Buildings.id).first()
+        #     houses.append(house)
+        u = houses.paginate(page=page, per_page=18)
+        return render_template('management.html', houses=houses, u=u.items, pagination=u)
 
     else:
         flash('User should login first!')

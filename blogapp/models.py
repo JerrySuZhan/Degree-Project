@@ -14,6 +14,10 @@ class Buildings(db.Model):
     orientation = db.Column(db.String(64), index=True)
     building_type = db.Column(db.String(64), index=True)
     num_of_floors = db.Column(db.String(64), index=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    detail = db.Column(db.String(2000))
+    photo = db.Column(db.String(256))
+    message = db.relationship('Message', backref='buildings')
 
     # def __repr__(self):
     #     return '<User %r>' % self.username
@@ -29,11 +33,14 @@ class User(db.Model):
     district = db.Column(db.String(150))
     address = db.Column(db.String(1200))
     photo = db.Column(db.String(256))
+    buildings = db.relationship('Buildings', backref='user')
+    message = db.relationship('Message', backref='user')
 
     # def __repr__(self):
     #     return '<User {}>'.format(self.username)
 
-class Management(db.Model):
+class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer)
-    house_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    house_id = db.Column(db.Integer, db.ForeignKey('buildings.id'))
+    content = db.Column(db.String(1200))

@@ -80,6 +80,9 @@
 {#                        <a href="/single">Single Property <span class="uk-margin-small-left"></span></a>#}
 {#                    </li>#}
                     <li>
+                        <a href="/management"> My Houses <span class="uk-margin-small-left"></span></a>
+                    </li>
+                    <li>
                         <a href="/new">New for Sale <span class="uk-margin-small-left"></span></a>
                     </li>
                     <li>
@@ -180,7 +183,7 @@
 
         <h5 class="uk-heading-line"><span>Basic Information</span></h5>
 
-        <form method="post" action="" class="uk-child-width-1-1 uk-child-width-1-2@s" uk-grid>
+        <form method="post" action="" enctype="multipart/form-data" novalidate class="uk-child-width-1-1 uk-child-width-1-2@s" uk-grid>
 
             <div>
                 <label class="uk-form-label" for="form-stacked-text">District</label>
@@ -282,6 +285,47 @@
                      {{ form.year(class="uk-input uk-border-rounded", type="number", value="2010", min="1900") }}
                 </div>
             </div>
+            <p></p>
+            <div class="uk-width-1-1">
+                <h5 class="uk-heading-line"><span>Details</span></h5>
+            </div>
+
+            <p></p>
+            <div class="uk-width-1-1">
+                <label class="uk-form-label" for="form-stacked-text">Description</label>
+                <div class="uk-form-controls">
+{#                    <input class="uk-input uk-border-rounded" type="number" value=2010 min="1700">#}
+                     {{ form.detail(class="uk-textarea uk-border-rounded uk-padding-small", rows="4", value="This is a nice house...") }}
+                </div>
+            </div>
+
+            <div  class="uk-width-1-1">
+                <label class="uk-form-label" for="form-stacked-text">Photo</label>
+                <div class="uk-form-controls">
+{#                    <input class="uk-input uk-border-rounded" type="number" value=2010 min="1700">#}
+                     {{ form.photo(class="uk-textarea uk-border-rounded uk-height-small uk-padding-small uk-width-1-2") }}
+                </div>
+            </div>
+            <form class="uk-child-width-1-1 uk-child-width-1-2@s" uk-grid>
+{#                <div class="uk-width-1-1">#}
+{#                    <label class="uk-form-label" for="form-stacked-text">Description</label>#}
+{#                    <div class="uk-form-controls">#}
+{#                        <textarea class="uk-textarea uk-border-rounded uk-padding-small" rows="4">This is a nice house...</textarea>#}
+{#                    </div>#}
+{#                </div>#}
+
+{#                <div class="uk-width-1-1">#}
+{#                    <label class="uk-form-label" for="form-stacked-text">Photos</label>#}
+{#                    <div class="uk-form-controls">#}
+{#                        <input type="file" multiple class="uk-textarea uk-border-rounded uk-height-small uk-padding-small uk-width-1-2">#}
+{#                    </div>#}
+{#                </div>#}
+
+            <p></p>
+            <div class="uk-width-1-1">
+                <h5 class="uk-heading-line"><span>Price Estimation</span></h5>
+            </div>
+
 
             <div class="uk-width-1-1">
                 <label class="uk-form-label" for="form-stacked-text">According to the information, we suggest you sell your house at the following price:</label>
@@ -299,60 +343,16 @@
 {#                    <button class="uk-button uk-border-rounded uk-align-right uk-button-primary"type="submit">Submit</button>#}
                     {{ form.csrf_token }}
                     {{ form.submit(class="uk-input uk-border-rounded uk-align-right uk-button-primary") }}
-
                 </div>
-
             </div>
-            <p>{{ form.errors }}</p>
         </form>
-
         <br>
-
-        <h5 class="uk-heading-line"><span>Details</span></h5>
-        <form class="uk-child-width-1-1 uk-child-width-1-2@s" uk-grid>
-            <div class="uk-width-1-1">
-                <label class="uk-form-label" for="form-stacked-text">Description</label>
-                <div class="uk-form-controls">
-                    <textarea class="uk-textarea uk-border-rounded uk-padding-small" rows="4">This is a nice house...</textarea>
-                </div>
-            </div>
-
-            <div class="uk-width-1-1">
-                <label class="uk-form-label" for="form-stacked-text">Photos</label>
-                <div class="uk-form-controls">
-                    <input type="file" multiple class="uk-textarea uk-border-rounded uk-height-small uk-padding-small uk-width-1-2">
-                </div>
-            </div>
-
         </form>
-
-        <br>
-
-        <h5 class="uk-heading-line"><span>Price Estimation</span></h5>
-        <form class="uk-child-width-1-1 uk-child-width-1-2@s" uk-grid>
-{#            <div class="uk-width-1-1">#}
-{#                <label class="uk-form-label" for="form-stacked-text">According to the information, we suggest you sell your house at the following price:</label>#}
-{#                <div class="uk-form-controls uk-width-1-2 uk-align-right"><br>#}
-{#                    <input class="uk-input uk-border-rounded uk-text-right"><br><br>#}
-{#                    <button class="uk-button uk-button-secondary uk-border-rounded uk-align-right">Estimate</button>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="uk-width-1-1">#}
-{#                <label class="uk-form-label" for="form-stacked-text">Your Final Price:</label>#}
-{#                <div class="uk-form-controls uk-width-1-2 uk-align-right"><br>#}
-{#                    <input class="uk-input uk-border-rounded uk-text-right"><br><br>#}
-{#                    {{ form.total_price(class="uk-input uk-border-rounded uk-text-right", type="number", value="500", min="0") }}#}
-{#                    <button class="uk-button uk-border-rounded uk-align-right uk-button-primary"type="submit">Submit</button>#}
-{#                     {{ form.submit(class="uk-input uk-border-rounded uk-align-right uk-button-primary") }}#}
-{#                </div>#}
-{#            </div>#}
-        </form>
-
     </div>
 
 </div>
-</div>
 
+<br>
 <!-- END PAGE CONTENT -->
 
 

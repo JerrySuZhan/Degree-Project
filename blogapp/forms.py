@@ -71,6 +71,8 @@ class AddHouseForm(FlaskForm):
     orientation = SelectField('Orientation', validators=[DataRequired()], coerce=str, choices=[('南', '南'), ('北', '北'),
                                                                                  ('东', '东'), ('西', '西'), ('西北', '西北'), ('西南', '西南'), ('东南', '东南'), ('东北', '东北')])
     year = IntegerField('Year', validators=[DataRequired()])
+    detail = StringField('Detail')
+    photo = FileField('Photo', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     total_price = IntegerField('Total Price', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
@@ -100,3 +102,8 @@ class VerifyAndResetForm(FlaskForm):
     new_password = PasswordField(' ', validators=[DataRequired()])
     new_password2 = PasswordField(' ', validators=[DataRequired()])
     submit = SubmitField('Reset')
+
+class SingleForm(FlaskForm):
+    content=StringField(' ', validators=[DataRequired()])
+    submit = SubmitField('Send Message')
+
