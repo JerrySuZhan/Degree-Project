@@ -1,0 +1,418 @@
+# Translations template for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-04-29 11:17+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: templates/test.html:1
+msgid "This is a test text"
+msgstr ""
+
+#: templates/test.html:2
+msgid "hello"
+msgstr ""
+
+#: templates/index.html:1
+msgid "Home"
+msgstr ""
+
+#: templates/index.html:2
+msgid "Listings"
+msgstr ""
+
+#: templates/index.html:3
+msgid "My Houses"
+msgstr ""
+
+#: templates/index.html:4
+msgid "New for Sale"
+msgstr ""
+
+#: templates/index.html:5
+msgid "Login"
+msgstr ""
+
+#: templates/index.html:6
+msgid "Sign Up"
+msgstr ""
+
+#: templates/index.html:7
+msgid "Pages"
+msgstr ""
+
+#: templates/index.html:8
+msgid "Contact"
+msgstr ""
+
+#: templates/index.html:9
+msgid "User Profile"
+msgstr ""
+
+#: templates/index.html:10
+msgid "About Us"
+msgstr ""
+
+#: templates/index.html:11
+msgid "Make a Call"
+msgstr ""
+
+#: templates/index.html:12
+msgid "Discover The Best Houses"
+msgstr ""
+
+#: templates/index.html:13
+msgid "Your Property, Our Priority."
+msgstr ""
+
+#: templates/index.html:14
+msgid "Discover Now"
+msgstr ""
+
+#: templates/index.html:15
+msgid "recommend for you"
+msgstr ""
+
+#: templates/index.html:16
+msgid "Guess You Like"
+msgstr ""
+
+#: templates/index.html:17
+msgid "What Makes Us"
+msgstr ""
+
+#: templates/index.html:18
+msgid "Preferred Choice"
+msgstr ""
+
+#: templates/index.html:19
+msgid "Maximum Choices"
+msgstr ""
+
+#: templates/index.html:20
+msgid "Integration of multiple intermediary resources, allowing customers to upload freely"
+msgstr ""
+
+#: templates/index.html:21
+msgid "Buyers Trust Us"
+msgstr ""
+
+#: templates/index.html:22
+msgid "Ensure the authenticity of housing information and provide manual inspection"
+msgstr ""
+
+#: templates/index.html:23
+msgid "Seller Prefer Us"
+msgstr ""
+
+#: templates/index.html:24
+msgid "Protect the seller's personal information and allow the free choice of trading partners"
+msgstr ""
+
+#: templates/index.html:25
+msgid "Expert guidance"
+msgstr ""
+
+#: templates/index.html:26
+msgid "Accurate recommendation system and house price estimate"
+msgstr ""
+
+#: templates/index.html:27
+msgid "About Us"
+msgstr ""
+
+#: templates/index.html:28
+msgid "Smart real estate startup company which open a new world of real estate in an online way, strategy and technology coexist."
+msgstr ""
+
+#: templates/index.html:29
+msgid "Quick Links"
+msgstr ""
+
+#: templates/index.html:30
+msgid "Contact Us"
+msgstr ""
+
+#: templates/index.html:31
+msgid "Properties"
+msgstr ""
+
+#: templates/change-password.html:32
+msgid "Change Password"
+msgstr ""
+
+#: templates/change-password.html:33
+msgid "Back to the"
+msgstr ""
+
+#: templates/change-password.html:34
+msgid "User Profile Page"
+msgstr ""
+
+#: templates/forgot.html:35
+msgid "Reset Password"
+msgstr ""
+
+#: templates/forgot-reset.html:36
+msgid "Back to"
+msgstr ""
+
+#: templates/forgot-reset.html:37
+msgid "Sign In"
+msgstr ""
+
+#: templates/listing.html:38
+msgid "Any"
+msgstr ""
+
+#: templates/listing.html:39
+msgid "All Properties"
+msgstr ""
+
+#: templates/listing.html:40
+msgid "Results"
+msgstr ""
+
+#: templates/listing.html:41
+msgid "Price (Hi-Lo)"
+msgstr ""
+
+#: templates/listing.html:42
+msgid "Price (Lo-Hi)"
+msgstr ""
+
+#: templates/listing.html:43
+msgid "Lowest SqFt"
+msgstr ""
+
+#: templates/listing.html:44
+msgid "Largest SqFt"
+msgstr ""
+
+#: templates/listing.html:45
+msgid "Per Sq.M."
+msgstr ""
+
+#: templates/listing.html:46
+msgid "Refined Decoration"
+msgstr ""
+
+#: templates/listing.html:47
+msgid "Bedrooms"
+msgstr ""
+
+#: templates/listing.html:48
+msgid "Living Room"
+msgstr ""
+
+#: templates/listing.html:49
+msgid "Sq.M."
+msgstr ""
+
+#: templates/listing.html:50
+msgid "Main Menu"
+msgstr ""
+
+#: templates/listing.html:51
+msgid "Follow Us"
+msgstr ""
+
+#: templates/login.html:52
+msgid "New to Group 20?"
+msgstr ""
+
+#: templates/login.html:53
+msgid "Forgot Password?"
+msgstr ""
+
+#: templates/management.html:53
+msgid "Management Your Properties"
+msgstr ""
+
+#: templates/messages.html:54
+msgid "Property Information"
+msgstr ""
+
+#: templates/messages.html:55
+msgid "Area:"
+msgstr ""
+
+#: templates/messages.html:56
+msgid "Floor:"
+msgstr ""
+
+#: templates/messages.html:57
+msgid "Bedrooms:"
+msgstr ""
+
+#: templates/messages.html:58
+msgid "Living Room:"
+msgstr ""
+
+#: templates/messages.html:59
+msgid "orientation:"
+msgstr ""
+
+#: templates/messages.html:60
+msgid "Year:"
+msgstr ""
+
+#: templates/messages.html:61
+msgid "Total Price:"
+msgstr ""
+
+#: templates/messages.html:62
+msgid "Total Floors:"
+msgstr ""
+
+#: templates/messages.html:63
+msgid "Potential Buyers"
+msgstr ""
+
+#: templates/post.html:64
+msgid "Basic Information"
+msgstr ""
+
+#: templates/post.html:65
+msgid "District"
+msgstr ""
+
+#: templates/post.html:66
+msgid "Address"
+msgstr ""
+
+#: templates/post.html:67
+msgid "Size (sq.m.)"
+msgstr ""
+
+#: templates/post.html:68
+msgid "Floor Range"
+msgstr ""
+
+#: templates/post.html:69
+msgid "Total Floor Number"
+msgstr ""
+
+#: templates/post.html:70
+msgid "Bedroom Number"
+msgstr ""
+
+#: templates/post.html:71
+msgid "Living Room Number"
+msgstr ""
+
+#: templates/post.html:72
+msgid "Orientation"
+msgstr ""
+
+#: templates/post.html:73
+msgid "Year"
+msgstr ""
+
+#: templates/post.html:74
+msgid "Details"
+msgstr ""
+
+#: templates/post.html:75
+msgid "Description"
+msgstr ""
+
+#: templates/post.html:76
+msgid "Photo"
+msgstr ""
+
+#: templates/post.html:77
+msgid "Price Estimation"
+msgstr ""
+
+#: templates/post.html:78
+msgid "According to the information, we suggest you sell your house at the following price:"
+msgstr ""
+
+#: templates/post.html:79
+msgid "Your Final Price:"
+msgstr ""
+
+#: templates/profile-new.html:80
+msgid "User Profile"
+msgstr ""
+
+#: templates/profile-new.html:81
+msgid "Change Password"
+msgstr ""
+
+#: templates/profile-new.html:82
+msgid "Log Out"
+msgstr ""
+
+#: templates/profile-new.html:83
+msgid "My Profile"
+msgstr ""
+
+#: templates/profile-new.html:84
+msgid "About Me"
+msgstr ""
+
+#: templates/profile-new.html:85
+msgid "Write more details about you"
+msgstr ""
+
+#: templates/singup.html:86
+msgid "Already have an account?"
+msgstr ""
+
+#: templates/single-property-1.html:87
+msgid "Similar Properties"
+msgstr ""
+
+#: templates/single-property-1.html:88
+msgid "Make An Appointment"
+msgstr ""
+
+#: templates/single-property-1.html:89
+msgid "Do you like this house?"
+msgstr ""
+
+#: templates/single-property-1.html:90
+msgid "Click the button below to let the owner know."
+msgstr ""
+
+#: templates/single-property-1.html:91
+msgid "The house owner will get your contact information then,"
+msgstr ""
+
+#: templates/single-property-1.html:92
+msgid "and contact with you to discuss the deal."
+msgstr ""
+
+#: templates/listing.html:93
+msgid "Newset"
+msgstr ""
+
+#: templates/message.html:94
+msgid "Orientation:"
+msgstr ""
+
+#: templates/message.html:95
+msgid "Area"
+msgstr ""
+
+#: templates/message.html:96
+msgid "Total Price"
+msgstr ""
+
+#: templates/message.html:97
+msgid "Delete"
+msgstr ""

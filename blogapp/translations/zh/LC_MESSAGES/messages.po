@@ -396,3 +396,23 @@ msgstr "房屋所有者会收到你的消息，"
 msgid "and contact with you to discuss the deal."
 msgstr "然后他会与你联系并讨论更多细节"
 
+#: templates/listing.html:93
+msgid "Newset"
+msgstr "最新房源"
+
+#: templates/message.html:94
+msgid "Orientation:"
+msgstr "朝向："
+
+#: templates/message.html:95
+msgid "Area"
+msgstr "面积"
+
+#: templates/message.html:96
+msgid "Total Price"
+msgstr "总价"
+
+#: templates/message.html:97
+msgid "Delete"
+msgstr "删除"
+

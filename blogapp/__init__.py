@@ -2,10 +2,13 @@ from flask import Flask
 from flask_mail import Mail, Message
 from blogapp.config import Config
 from flask_sqlalchemy import SQLAlchemy
+# from flask_dropzone import Dropzone
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app, use_native_unicode='utf8')
+# dropzone = Dropzone()
 
 app.config['MAIL_SERVER'] = "smtp.126.com"
 app.config['MAIL_PORT'] = 465

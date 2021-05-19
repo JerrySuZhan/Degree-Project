@@ -16,7 +16,9 @@ class Buildings(db.Model):
     num_of_floors = db.Column(db.String(64), index=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     detail = db.Column(db.String(2000))
-    photo = db.Column(db.String(256))
+    photo_1 = db.Column(db.String(256))
+    photo_2 = db.Column(db.String(256))
+    photo_3 = db.Column(db.String(256))
     message = db.relationship('Message', backref='buildings')
 
     # def __repr__(self):
@@ -44,3 +46,9 @@ class Message(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     house_id = db.Column(db.Integer, db.ForeignKey('buildings.id'))
     content = db.Column(db.String(1200))
+
+class Ratings(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    house_id = db.Column(db.Integer)
+    ratings = db.Column(db.Integer)

@@ -8,6 +8,7 @@
     <script src="../static/assets/js/jquery-3.5.1.min.js"></script>
     <script src="../static/assets/js/uikit.min.js"></script>
     <script src="../static/assets/js/uikit-icons.min.js"></script>
+    <script src="../static/assets/js/jquery.min.js"></script>
 </head>
 <body>
 <div id="preloader">
@@ -48,8 +49,9 @@
 
                 <div class="uk-navbar-right">
                     <ul id="test" class="uk-subnav uk-subnav-divider">
-                        <li class="uk-active"><a href="#">English</a></li>
-                        <li><a href="#">简体中文</a></li>
+                        <li class="locale" id="en" data-value="{{ url_for('set_locale', locale='en') }}"><a href="#">English</a></li>
+                        <li class="locale" id="zh" data-value="{{ url_for('set_locale', locale='zh') }}"><a href="#">简体中文</a></li>
+                        {{ _('%(test)s', test=test) }}
                     </ul>
                 </div>
             </nav>
@@ -69,36 +71,36 @@
 
                 <ul class="uk-navbar-nav">
                     <li>
-                        <a href="/index">Home <span class="uk-margin-small-left"></span></a>
+                       <a href="/index">{{ _("Home") }} <span class="uk-margin-small-left"></span></a>
                     </li>
                     <li>
-                        <a href="/listing/1nullnullnullnull">Listings <span class="uk-margin-small-left"></span></a>
+                        <a href="/listing/1nullnullnullnull">{{ _("Listings") }} <span class="uk-margin-small-left"></span></a>
                     </li>
                     <li>
-                        <a href="/new">New for Sale <span class="uk-margin-small-left"></span></a>
+                        <a href="/new">{{ _("New for Sale") }} <span class="uk-margin-small-left"></span></a>
                     </li>
                     <li>
-                        <a href="/management/1"> My Houses <span class="uk-margin-small-left"></span></a>
+                        <a href="/management/1">{{ _("My Houses") }}  <span class="uk-margin-small-left"></span></a>
                     </li>
                     <li>
-                        <a href="#">Login<span class="uk-margin-small-left" uk-icon="icon: chevron-down"></span></a>
+                        <a href="#">{{ _("Login") }}<span class="uk-margin-small-left" uk-icon="icon: chevron-down"></span></a>
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><a href="/login">Login</a></li>
+                                <li><a href="/login">{{ _("Login") }}</a></li>
                                 <li class="uk-nav-divider"></li>
-                                <li><a href="/signup">Sign Up</a></li>
+                                <li><a href="/signup">{{ _("Sign Up") }}</a></li>
                             </ul>
                         </div>
                     </li>
                     <li>
-                        <a href="#">Pages<span class="uk-margin-small-left" uk-icon="icon: chevron-down"></span></a>
+                        <a href="#">{{ _("Pages") }}<span class="uk-margin-small-left" uk-icon="icon: chevron-down"></span></a>
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="contact.html">{{ _("Contact") }}</a></li>
                                 <li class="uk-nav-divider"></li>
-                                <li><a href="/profile">User Profile</a></li>
+                                <li><a href="/profile">{{ _("User Profile") }}</a></li>
                                 <li class="uk-nav-divider"></li>
-                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="about.html">{{ _("About Us") }}</a></li>
                             </ul>
                         </div>
                     </li>
@@ -110,7 +112,7 @@
                 <div class="uk-navbar-item">
 
                     <a class="uk-button uk-button-primary uk-button-large uk-text-truncate uk-border-pill"
-                    ><i class="fas fa-phone-alt uk-margin-small-right"></i> Make a Call
+                    ><i class="fas fa-phone-alt uk-margin-small-right"></i> {{ _("Make a Call") }}
                     </a>
                 </div>
             </div>
@@ -155,11 +157,11 @@
 
         <div class="uk-child-width-1-1 uk-child-width-1-2@s uk-flex uk-flex-middle uk-flex-center uk-grid-small"
              uk-grid>
-            <div class="uk-flex uk-flex-center uk-flex-left@s"><h5 class="title">Properties</h5></div>
+            <div class="uk-flex uk-flex-center uk-flex-left@s"><h5 class="title">{{ _("Properties") }}</h5></div>
             <div>
                 <ul class="uk-breadcrumb uk-flex-center uk-flex-right@s">
-                    <li><a href="/index">Home</a></li>
-                    <li class="uk-disabled"><a>Properties</a></li>
+                    <li><a href="/index">{{ _("Home") }}</a></li>
+                    <li class="uk-disabled"><a>{{ _("Properties") }}</a></li>
                 </ul>
             </div>
         </div>
@@ -171,184 +173,137 @@
 
 <!-- ADVANCED SEARCH -->
 
-<div class="ev-section-light uk-margin-bottom ev-bottom-border uk-visible@m">
 
-    <div class="ev-container ev-section-padding-v-m">
+<!-- END ADVANCED SEARCH -->
 
-        <!-- BREADCRUMBS
-
-        <div class="ev-breadcrumbs">
-            <ul class="uk-breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li class="uk-disabled"><a>Properties</a></li>
-            </ul>
-        </div>
-
-        END BREADCRUMBS -->
-
-
-        <form method="post" action="/listing/1{{ search_input }}{{ district_input }}{{ bedrooms_input }}{{ livingrooms_input }}{{ price_per_meter_input }}" class="uk-search uk-search-default uk-width-1-1">
-{#            <span uk-search-icon></span>#}
+<div class="ev-page-container">
+	
+	<form method="post" action="/listing/1{{ search_input }}{{ district_input }}{{ bedrooms_input }}{{ livingrooms_input }}{{ price_per_meter_input }}" class="uk-search uk-search-default uk-width-1-1">
             <input name="content" id="content" class="uk-search-input uk-border-rounded uk-width-1-3" type="text" placeholder="Search...">
             <button class="uk-button uk-border-rounded" type="submit"><i class="fas fa-search"></i></button>
-{#        </form>#}
         <hr>
 
-
-{#        <form class="uk-grid-small" uk-grid>#}
         <div class="uk-grid-small" uk-grid>
-            <div class="uk-width-1-2 uk-width-1-2@s uk-width-1-4@m">
-                <div class="uk-margin">
-                    <div class="uk-width-1-1 uk-inline">
-                        <select id="district" name="district" class="nc-select wide uk-form-large">
-                            <option data-display="Districts">Any</option>
-{#                            <option>Haidian</option>#}
-                            <option>海淀</option>
-                            <option>朝阳</option>
-                            <option>丰台</option>
-                            <option>门头沟</option>
-                            <option>石景山</option>
-                            <option>房山</option>
-                            <option>通州</option>
-                            <option>顺义</option>
-                            <option>昌平</option>
-                            <option>大兴</option>
-                            <option>怀柔</option>
-                            <option>平谷</option>
-                            <option>延庆</option>
-                            <option>密云</option>
-                            <option>西城</option>
-                            <option>东城</option>
-                        </select>
+                <div class="uk-width-1-2 uk-width-1-2@s uk-width-1-4@m">
+                    <div class="uk-margin">
+                        <div class="uk-width-1-1 uk-inline">
+                            <select id="district" name="district" class="nc-select wide uk-form-large">
+                                <option data-display="Districts">Any</option>
+                                {#                            <option>Haidian</option>#}
+                                <option>Dongcheng</option>
+                                <option>Haidian</option>
+                                <option>Chaoyang</option>
+                                <option>Fengtai</option>
+                                <option>Mentougou</option>
+                                <option>Shijingshan</option>
+                                <option>Fangshan</option>
+                                <option>Tongzhou</option>
+                                <option>Shunyi</option>
+                                <option>Changping</option>
+                                <option>Daxing</option>
+                                <option>Huairou</option>
+                                <option>Pinggu</option>
+                                <option>Yanqing</option>
+                                <option>Miyun</option>
+                                <option>Xicheng</option>
+                                
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-{#            <div class="uk-width-1-2 uk-width-1-2@s uk-width-1-4@m">#}
-{#                <div class="uk-margin">#}
-{#                    <div class="uk-width-1-1 uk-inline">#}
-{#                        <select id="building_type" name="building_type" class="nc-select wide uk-form-large">#}
-{#                            <option data-display="Floor">Any</option>#}
-{#                            <option>高楼层</option>#}
-{#                            <option>中楼层</option>#}
-{#                            <option>低楼层</option>#}
-{#                            <option>顶层</option>#}
-{#                            <option>底层</option>#}
-{#                        </select>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-
-            <div class="uk-width-1-2 uk-width-1-2@s uk-width-1-4@m">
-                <div class="uk-margin">
-                    <div class="uk-width-1-1 uk-inline">
-                        <select id="price_per_meter" name="price_per_meter" class="nc-select wide uk-form-large">
-                            <option data-display="Area (sq.m.)">Any</option>
-                            <option>10000</option>
-                            <option>20000</option>
-                            <option>30000</option>
-                            <option>40000</option>
-                            <option>50000</option>
-                        </select>
+           <div class="uk-width-1-2 uk-width-1-2@s uk-width-1-4@m">
+                    <div class="uk-margin">
+                        <div class="uk-width-1-1 uk-inline">
+                            <select id="building_type" name="building_type" class="nc-select wide uk-form-large">
+                                <option data-display="Floor">{{ _("Any") }}</option>
+                                <option>High Floor</option>
+                                <option>Medium Floor</option>
+                                <option>Low Floor</option>
+                                <option>Top Floor</option>
+                                <option>Lowest Floor</option>
+                                <option>Ground Floor</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-{#            <div class="uk-width-1-2 uk-width-1-2@s uk-width-1-4@m">#}
-{#                <div class="uk-margin">#}
-{#                    <div class="uk-width-1-1 uk-inline">#}
-{#                        <select class="nc-select wide uk-form-large">#}
-{#                            <option data-display="Decoration Styles">Any</option>#}
-{#                            <option>Refined</option>#}
-{#                            <option>Simple</option>#}
-{#                        </select>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
+            <div class="uk-width-1-2 uk-width-1-2@s uk-width-1-4@m">
+                    <div class="uk-margin">
+                        <div class="uk-width-1-1 uk-inline">
+                            <select id="price_per_meter" name="price_per_meter" class="nc-select wide uk-form-large">
+                                <option data-display="￥ (sq.m.)">Any</option>
+                                <option>10000-20000</option>
+                                <option>20000-30000</option>
+                                <option>30000-40000</option>
+                                <option>40000-50000</option>
+                                <option>50000-60000</option>
+                                <option>60000-70000</option>
+                                <option>70000-80000</option>
+                                <option>80000-90000</option>
+                                <option>>90000</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="uk-width-1-2 uk-width-1-2@s uk-width-1-4@m">
+                    <div class="uk-margin">
+                        <div class="uk-width-1-1 uk-inline">
+                            <select id="size" name="size" class="nc-select wide uk-form-large">
+                                <option data-display="size">Any</option>
+                                <option>0-20</option>
+                                <option>20-40</option>
+                                <option>40-60</option>
+                                <option>60-80</option>
+                                <option>80-100</option>
+                                <option>100-120</option>
+                                <option>120-140</option>
+                                <option>140-160</option>
+                                <option>>160</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
 
             <div class="uk-width-1-2 uk-width-1-2@s uk-width-1-4@m">
-                <div class="uk-margin">
-                    <div class="uk-width-1-1 uk-inline">
-                        <select id="bedrooms"  name="bedrooms" class="nc-select wide uk-form-large">
-                            <option data-display="Bedrooms">Any</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
+                    <div class="uk-margin">
+                        <div class="uk-width-1-1 uk-inline">
+                            <select id="bedrooms" name="bedrooms" class="nc-select wide uk-form-large">
+                                <option data-display="Bedrooms">Any</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
             </div>
 
             <div class="uk-width-1-2 uk-width-1-2@s uk-width-1-4@m">
-                <div class="uk-margin">
-                    <div class="uk-width-1-1 uk-inline">
-                        <select id="livingrooms"  name="livingrooms" class="nc-select wide uk-form-large">
-                            <option data-display="Living Rooms">Any</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
+                    <div class="uk-margin">
+                        <div class="uk-width-1-1 uk-inline">
+                            <select id="livingrooms" name="livingrooms" class="nc-select wide uk-form-large">
+                                <option data-display="Living Rooms">Any</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
-{##}
-{#            <div class="uk-width-1-2 uk-width-1-2@s uk-width-1-4@m">#}
-{#                <div class="uk-margin">#}
-{#                    <div class="uk-width-1-1 uk-inline">#}
-{#                        <select class="nc-select wide uk-form-large">#}
-{#                            <option data-display="Min Price">Any</option>#}
-{#                            <option>￥50000</option>#}
-{#                            <option>￥60000</option>#}
-{#                            <option>￥70000</option>#}
-{#                            <option>￥80000</option>#}
-{#                            <option>￥90000</option>#}
-{#                            <option>￥100000</option>#}
-{#                        </select>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{##}
-{#            <div class="uk-width-1-2 uk-width-1-2@s uk-width-1-4@m">#}
-{#                <div class="uk-margin">#}
-{#                    <div class="uk-width-1-1 uk-inline">#}
-{#                        <select class="nc-select wide uk-form-large">#}
-{#                            <option data-display="Max Price">￥50000</option>#}
-{#                            <option>￥60000</option>#}
-{#                            <option>￥70000</option>#}
-{#                            <option>￥80000</option>#}
-{#                            <option>￥90000</option>#}
-{#                            <option>￥100000</option>#}
-{#                            <option>￥150000</option>#}
-{#                            <option>￥200000</option>#}
-{#                            <option>Any</option>#}
-{#                        </select>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-
-
-{#            <div class="uk-width-1-1@s">#}
-{#                <div class="uk-margin">#}
-{#                    <button class="uk-button uk-button-primary uk-button-large uk-border-rounded uk-margin-small-top uk-width-1-1 uk-text-truncate"#}
-{#                            type="submit">Search <i class="fas fa-angle-right uk-margin-small-left"></i></button>#}
-{#                </div>#}
-{#            </div>#}
-
 
         </div>
-{#        </form>#}
         </form>
 
-    </div>
 
 </div>
 
-<!-- END ADVANCED SEARCH -->
+<hr>
 
 
 <!-- PAGE CONTENT -->
@@ -361,21 +316,14 @@
             <div class="uk-grid-medium" uk-grid>
                 <div class="uk-width-1-2 uk-width-expand@m">
                     <div class="ev-listing-title">
-                        <h5 class="uk-text-truncate">All Properties</h5>
-                        <p>{{ pagination.total }} Results</p>
+                        <h5 class="uk-text-truncate">{{ _("All Properties") }}</h5>
+                        <p>{{ pagination.total }} {{ _("Results") }}</p>
                     </div>
                 </div>
-                <div class="uk-width-1-2 uk-width-1-3@m">
-                    <select class="ev-order-by nc-select wide">
-                        <option>Newset</option>
-                        <option selected="">Price (Hi-Lo)</option>
-                        <option>Price (Lo-Hi)</option>
-                        <option>Lowest SqFt</option>
-                        <option>Largest SqFt</option>
-                    </select>
-                </div>
-
+                
             </div>
+
+	    
 
             <div class="uk-grid-medium" uk-grid>
                 {% for i in u %}
@@ -386,27 +334,27 @@
                                     <a href="/single/{{ i.id }}">
                                         <div class="uk-inline">
                                             <img id="imgEle" alt="Image" class="uk-border-rounded"
-                                                 src="../static/uploaded_image/building/{{i.photo}}">>
+                                                 style="width: 500px;height: 250px;object-fit: cover;" src="../static/uploaded_image/building/{{ i.photo_1 }}">
                                             <div class="uk-overlay uk-light uk-position-top">
 
                                                 <!--                                         <span class="uk-label uk-label-primary">Featured</span>-->
                                             </div>
                                             <div class="uk-overlay overlay-gradient uk-position-bottom">
                                                 <p class="ev-price">￥{{ i.price_per_meter }}
-                                                    <small>/ Per Sq.M.</small>
+                                                    <small>/ {{ _("Per Sq.M.") }}</small>
                                                 </p>
                                             </div>
                                         </div>
                                     </a>
                                     <div class="ev-body">
-                                        <span class="ev-meta uk-text-small">Refined Decoration</span>
+                                        <span class="ev-meta uk-text-small">Total Price: ￥{{ i.total_price }}(ten thousand)</span>
                                         <h3 class="ev-title uk-card-title uk-text-bolder uk-text-truncate uk-text-truncate">{{ i.address }}</h3>
                                         <p class="ev-location"><i
                                                 class="fas fa-map-marker-alt uk-margin-small-right"></i> {{ i.district }}</p>
                                         <ul class="ev-info uk-subnav" uk-margin>
-                                            <li><span>{{ i.num_of_bedrooms }} Bedrooms </span></li>
-                                            <li><span>{{ i.num_of_living_rooms }} Living Room</span></li>
-                                            <li><span>{{ i.size }} Sq.M.</span></li>
+                                            <li><span>{{ i.num_of_bedrooms }} {{ _("Bedrooms") }} </span></li>
+                                            <li><span>{{ i.num_of_living_rooms }} {{ _("Living Room") }}</span></li>
+                                            <li><span>{{ i.size }} {{ _("Sq.M.") }}</span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -457,9 +405,9 @@
     <div class="ev-container">
         <div class="ev-widgets uk-grid-large" uk-grid>
             <div class="uk-width-1-1 uk-width-1-2@s uk-width-1-4@m">
-                <h4 class="ev-title">About Us</h4>
-                <p class="ev-about">Smart real estate startup company which open a new world of real estate in an online
-                    way, strategy and technology coexist.</p>
+                <h4 class="ev-title">{{ _("About Us") }}</h4>
+                <p class="ev-about">{{ _("Smart real estate startup company which open a new world of real estate in an online
+                    way, strategy and technology coexist.") }}</p>
                 <ul class="ev-follow uk-iconnav">
                     <li>
                         <a href="" uk-icon="icon: facebook"></a>
@@ -476,17 +424,17 @@
                 </ul>
             </div>
             <div class="uk-width-1-1 uk-width-1-2@s uk-width-1-4@m">
-                <h4 class="ev-title">Quick Links</h4>
+                <h4 class="ev-title">{{ _("Quick Links") }}</h4>
                 <ul class="uk-list">
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/signup">Sign Up</a></li>
-                    <li><a href="/listing/1nullnullnullnull">Listings</a></li>
-                    <li><a href="/new">New for Sale</a></li>
-                    <li><a href="/profile">User Profile</a></li>
+                    <li><a href="/login">{{ _("Login") }}</a></li>
+                    <li><a href="/signup">{{ _("Sign Up") }}</a></li>
+                    <li><a href="/listing/1nullnullnullnull">{{ _("Listings") }}</a></li>
+                    <li><a href="/new">{{ _("New for Sale") }}</a></li>
+                    <li><a href="/profile">{{ _("User Profile") }}</a></li>
                 </ul>
             </div>
             <div class="uk-width-1-1 uk-width-1-2@s uk-width-1-4@m">
-                <h4 class="ev-title">Contact Us</h4>
+                <h4 class="ev-title">{{ _("Contact Us") }}</h4>
                 <ul class="uk-list">
                     <li><i class="ev-icon fas fa-envelope"></i> 1016771126@qq.com</li>
                     <li><i class="ev-icon fas fa-map-marker-alt"></i> Teaching Building 4, 604</li>
@@ -514,16 +462,15 @@
                     </div>
                     <div class="uk-width-1-1 uk-width-1-2@m uk-flex-center uk-flex-right@m uk-visible@s">
                         <ul class="uk-subnav uk-flex-center uk-flex-right@m">
-                            <li><a href="/index">Home</a></li>
-                            <li><a href="/listing/1nullnullnullnull">Properties</a></li>
-                            <li><a href="/new">New for Sale</a></li>
-                            <li><a href="/login">Login</a></li>
+                            <li><a href="/index">{{ _("Home") }}</a></li>
+                            <li><a href="/listing/1nullnullnullnull">{{ _("Properties") }}</a></li>
+                            <li><a href="/new">{{ _("New for Sale") }}</a></li>
+                            <li><a href="/login">{{ _("Login") }}</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -544,46 +491,58 @@
         <hr>
         <a href="#" class="ev-signin uk-button uk-border-rounded">
             <i class="fas fa-user uk-margin-small-right"></i>
-            Sign In
+            {{ _("Sign In") }}
         </a>
         <hr>
 
-        <p class="uk-nav-header">Main Menu</p>
+        <p class="uk-nav-header">{{ _("Main Menu") }}</p>
 
         <ul class="ev-main-menu uk-nav-default uk-nav-parent-icon uk-margin-small-bottom" uk-nav>
             <li>
-                <a href="/index">Home</a>
+                <a href="/index">{{ _("Home") }}</a>
             </li>
             <li>
-                <a href="/listing/1nullnullnullnull">Listings</a>
+                <a href="/listing/1nullnullnullnull">{{ _("Listings") }}</a>
             </li>
-{#            <li>#}
-{#                <a href="/single">Single Property</a>#}
-{#            </li>#}
+	    <li>
+                <a href="/new">{{ _("New for Sale") }} <span class="uk-margin-small-left"></span></a>
+            </li>
+            <li>
+                <a href="/management/1">{{ _("My Houses") }}  <span class="uk-margin-small-left"></span></a>
+            </li>
             <li class="uk-parent">
-                <a href="#">Login</a>
+                <a href="#">{{ _("Login") }}</a>
                 <ul class="uk-nav-sub">
-                    <li><a href="/login">Login</a></li>
+                    <li><a href="/login">{{ _("Login") }}</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a href="/signup">Sign Up</a></li>
+                    <li><a href="/signup">{{ _("Sign Up") }}</a></li>
                 </ul>
             </li>
             </li>
             <li>
             <li class="uk-parent">
-                <a href="#">Pages</a>
+                <a href="#">{{ _("Pages") }}</a>
                 <ul class="uk-nav-sub">
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="contact.html">{{ _("Contact") }}</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a href="/profile">User Profile</a></li>
+                    <li><a href="/profile">{{ _("User Profile") }}</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="about.html">{{ _("About Us") }}</a></li>
                 </ul>
             </li>
             </li>
         </ul>
 
-        <p class="uk-nav-header">Follow Us</p>
+	<p class="uk-nav-header">Language</p>
+
+	<ul class="ev-main-menu uk-nav-default uk-nav-parent-icon uk-margin-small-bottom" uk-nav>
+	    <li class="locale" id="en" data-value="{{ url_for('set_locale', locale='en') }}"><a href="#">English</a></li>
+            <li class="locale" id="zh" data-value="{{ url_for('set_locale', locale='zh') }}"><a href="#">简体中文</a></li>
+            {{ _('%(test)s', test=test) }}
+	</ul>
+
+
+        <p class="uk-nav-header">{{ _("Follow Us") }}</p>
 
         <ul class="ev-followus uk-iconnav uk-margin-small-bottom">
             <li>
@@ -600,6 +559,7 @@
             </li>
         </ul>
     </div>
+
 
 </div>
 
@@ -625,6 +585,20 @@
     {#imgEle.setAttribute('src',imgSrc);//设置src属性#}
 
 
+</script>
+
+<script>
+    $(document).on('click', '.locale', function () {
+        var val = $(this).attr('data-value');
+        $.ajax({
+            url: val,
+            type: 'GET',
+            success: function (ret) {
+                console.log(ret);
+                location.reload();
+            }
+        })
+    });
 </script>
 
 </body>

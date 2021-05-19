@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, SelectField, DateField, PasswordField, BooleanField, SubmitField, validators, \
-    FileField, IntegerField
+    FileField, IntegerField, FloatField
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from sqlalchemy import and_
@@ -11,16 +11,16 @@ from wtforms import form, fields, validators, widgets
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 class LoginForm(FlaskForm):
-    email = StringField(' ', validators=[DataRequired()])
-    password = PasswordField(' ', validators=[DataRequired()])
+    email = StringField(' ', validators=[DataRequired(message= u'Please enter your email'), Email(message= u'Please enter a valid email，e.g.：username@domain.com')])
+    password = PasswordField(' ', validators=[DataRequired(message= u'Please enter your password')])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Log in')
 
 class SignupForm(FlaskForm):
-    username = StringField(' ', validators=[DataRequired()])
-    email = StringField(' ', validators=[DataRequired()])
-    password = PasswordField(' ', validators=[DataRequired()])
-    password2 = PasswordField(' ', validators=[DataRequired()])
+    username = StringField(' ', validators=[DataRequired(message= u'Please enter your username')])
+    email = StringField(' ', validators=[DataRequired(message= u'Please enter your email'), Email(message= u'Please enter a valid email，e.g.：username@domain.com')])
+    password = PasswordField(' ', validators=[DataRequired(message= u'Please enter your password')])
+    password2 = PasswordField(' ', validators=[DataRequired(message= u'Please enter your password twice')])
     submit = SubmitField('Sign up')
 
 
@@ -30,49 +30,52 @@ class ProfileForm(FlaskForm):
     phone = StringField('Phone')
     # email = StringField('Email', validators=[DataRequired()])
     district = SelectField('District', coerce=str,
-                           choices=[('东城', '东城'), ('西城', '西城'),
-                                    ('朝阳', '朝阳'), ('海淀', '海淀'),
-                                    ('通州', '通州'), ('昌平', '昌平'),
-                                    ('怀柔', '怀柔'), ('密云', '密云'),
-                                    ('门头沟', '门头沟'), ('丰台', '丰台'),
-                                    ('石景山', '石景山'), ('房山', '房山'),
-                                    ('顺义', '顺义'), ('大兴', '大兴'),
-                                    ('延庆', '延庆'), ('平谷', '平谷')
-                                    ])
+                           choices=[('东城', 'Dongcheng'), ('西城', 'Xicheng'),
+                                                                       ('朝阳', 'Chaoyang'), ('海淀', 'Haidian'),
+                                                                       ('通州', 'Tongzhou'), ('昌平', 'Changping'),
+                                                                       ('怀柔', 'Huairou'), ('密云', 'Miyun'),
+                                                                       ('门头沟', 'Mentougou'), ('丰台', 'Fengtai'),
+                                                                       ('石景山', 'Shijingshan'), ('房山', 'Fangshan'),
+                                                                       ('顺义', 'Shunyi'), ('大兴', 'Daxing'),
+                                                                       ('延庆', 'Yanqing'), ('平谷', 'Pinggu')
+                                                                       ])    
     address = StringField('Address')
     photo = FileField('Photo', validators=[FileAllowed(['jpg','jpeg','png'])])
     submit = SubmitField('Save Changes')
 
 class ChangePasswordForm(FlaskForm):
-    old_password = PasswordField(' ', validators=[DataRequired()])
-    new_password = PasswordField(' ', validators=[DataRequired()])
-    new_password2 = PasswordField(' ', validators=[DataRequired()])
+    old_password = PasswordField(' ', validators=[DataRequired(message= u'Please enter your old password')])
+    new_password = PasswordField(' ', validators=[DataRequired(message= u'Please enter your new password')])
+    new_password2 = PasswordField(' ', validators=[DataRequired(message= u'Please enter your new password twice')])
     submit = SubmitField('Save Changes')
 
 class AddHouseForm(FlaskForm):
-    district = SelectField('District', validators=[DataRequired()], coerce=str, choices=[('东城', '东城'), ('西城', '西城'),
-                                                                           ('朝阳', '朝阳'), ('海淀', '海淀'),
-                                                                           ('通州', '通州'), ('昌平', '昌平'),
-                                                                           ('怀柔', '怀柔'), ('密云', '密云'),
-                                                                           ('门头沟', '门头沟'), ('丰台', '丰台'),
-                                                                           ('石景山', '石景山'), ('房山', '房山'),
-                                                                           ('顺义', '顺义'), ('大兴', '大兴'),
-                                                                           ('延庆', '延庆'), ('平谷', '平谷')
-                                                                           ])
+    district = SelectField('District', validators=[DataRequired()], coerce=str, choices=[('东城', 'Dongcheng'), ('西城', 'Xicheng'),
+                                                                       ('朝阳', 'Chaoyang'), ('海淀', 'Haidian'),
+                                                                       ('通州', 'Tongzhou'), ('昌平', 'Changping'),
+                                                                       ('怀柔', 'Huairou'), ('密云', 'Miyun'),
+                                                                       ('门头沟', 'Mentougou'), ('丰台', 'Fengtai'),
+                                                                       ('石景山', 'Shijingshan'), ('房山', 'Fangshan'),
+                                                                       ('顺义', 'Shunyi'), ('大兴', 'Daxing'),
+                                                                       ('延庆', 'Yanqing'), ('平谷', 'Pinggu')
+                                                                       ])    
     address = StringField('Address', validators=[DataRequired()])
     size = IntegerField('Size', validators=[DataRequired()])
-    floor_range = SelectField('Floor Range', validators=[DataRequired()], coerce=str, choices=[('低楼层', '低楼层'), ('中楼层', '中楼层'),
-                                                                                 ('高楼层', '高楼层'), ('顶层', '顶层'),
-                                                                                 ('底层', '底层')
-                                                                                 ])
+    floor_range = SelectField('Floor Range', validators=[DataRequired()], coerce=str, choices=[('低楼层', 'Low Floor'), ('中楼层', 'Medium Floor'),
+                                       ('高楼层', 'High Floor'), ('顶层', 'Top Floor'),
+                                       ('底层', 'Ground Floor')
+                                       ])
     floor_number = StringField('Floor Number', validators=[DataRequired()])
     bedroom_number = IntegerField('Bedroom Number', validators=[DataRequired()])
     livingroom_number = IntegerField('Living Room Number', validators=[DataRequired()])
-    orientation = SelectField('Orientation', validators=[DataRequired()], coerce=str, choices=[('南', '南'), ('北', '北'),
-                                                                                 ('东', '东'), ('西', '西'), ('西北', '西北'), ('西南', '西南'), ('东南', '东南'), ('东北', '东北')])
+    orientation = SelectField('Orientation', validators=[DataRequired()], coerce=str, choices=[('南', 'South'), ('北', 'North'),
+                                                                                 ('东', 'East'), ('西', 'West'), ('西北', 'North West'), ('西南', 'South West'), ('东南', 'South East'), ('东北', 'North East')])
     year = IntegerField('Year', validators=[DataRequired()])
     detail = StringField('Detail')
-    photo = FileField('Photo', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    # photo = FileField('Photo', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    photo1 = FileField('Photo', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    photo2 = FileField('Photo', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    photo3 = FileField('Photo', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     total_price = IntegerField('Total Price', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
@@ -94,16 +97,44 @@ class search_conditions(FlaskForm):
     submit = SubmitField()
 
 class SendEmailForm(FlaskForm):
-    emailaddress = StringField(' ', validators=[DataRequired()])
+    emailaddress = StringField(' ', validators=[DataRequired(message= u'Please enter your email'), Email(message= u'Please enter a valid email，e.g.：username@domain.com')])
     submit = SubmitField('Send')
 
 class VerifyAndResetForm(FlaskForm):
-    v_code = StringField(' ', validators=[DataRequired()])
-    new_password = PasswordField(' ', validators=[DataRequired()])
-    new_password2 = PasswordField(' ', validators=[DataRequired()])
+    v_code = StringField(' ', validators=[DataRequired(message= u'Please enter the verification code')])
+    new_password = PasswordField(' ', validators=[DataRequired(message= u'Please enter your new password')])
+    new_password2 = PasswordField(' ', validators=[DataRequired(message= u'Please enter your new password twice')])
     submit = SubmitField('Reset')
 
 class SingleForm(FlaskForm):
-    content=StringField(' ', validators=[DataRequired()])
+    content=StringField(' ', validators=[DataRequired(message= u'Say something?')])
     submit = SubmitField('Send Message')
 
+class EditForm(FlaskForm):
+    district = SelectField('District', validators=[DataRequired()], coerce=str, choices=[('东城', 'Dongcheng'), ('西城', 'Xicheng'),
+                                                                       ('朝阳', 'Chaoyang'), ('海淀', 'Haidian'),
+                                                                       ('通州', 'Tongzhou'), ('昌平', 'Changping'),
+                                                                       ('怀柔', 'Huairou'), ('密云', 'Miyun'),
+                                                                       ('门头沟', 'Mentougou'), ('丰台', 'Fengtai'),
+                                                                       ('石景山', 'Shijingshan'), ('房山', 'Fangshan'),
+                                                                       ('顺义', 'Shunyi'), ('大兴', 'Daxing'),
+                                                                       ('延庆', 'Yanqing'), ('平谷', 'Pinggu')
+                                                                       ])    
+    size = FloatField('Size', validators=[DataRequired()])
+    orientation = SelectField('Orientation', validators=[DataRequired()], coerce=str, choices=[('南', 'South'), ('北', 'North'),
+                                                                                 ('东', 'East'), ('西', 'West'), ('西北', 'North West'), ('西南', 'South West'), ('东南', 'South East'), ('东北', 'North East')])
+
+    floor_range = SelectField('Floor Range', validators=[DataRequired()], coerce=str,
+                              choices=[('低楼层', 'Low Floor'), ('中楼层', 'Medium Floor'),
+                                       ('高楼层', 'High Floor'), ('顶层', 'Top Floor'),
+                                       ('底层', 'Ground Floor')
+                                       ])
+    year = IntegerField('Year', validators=[DataRequired()])
+    bedroom_number = IntegerField('Bedroom Number', validators=[DataRequired()])
+    livingroom_number = IntegerField('Living Room Number', validators=[DataRequired()])
+    floor_number = StringField('Floor Number', validators=[DataRequired()])
+    total_price = FloatField('Total Price', validators=[DataRequired()])
+    submit = SubmitField('Edit')
+
+class DeleteForm(FlaskForm):
+    submit = SubmitField('Delete')
