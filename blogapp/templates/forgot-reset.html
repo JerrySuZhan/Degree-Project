@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="uk-height-1-1">
+<head>
+    <title>Forgot Password</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/assets/css/styles.css" />
+    <script src="../static/assets/js/jquery-3.5.1.min.js"></script>
+    <script src="../static/assets/js/uikit.min.js"></script>
+    <script src="../static/assets/js/uikit-icons.min.js"></script>
+    <script src="../static/assets/js/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+
+</head>
+{% block content %}
+        {% for message in get_flashed_messages(with_categories=True) %}
+            <div class="alert alert-{{ message[0] }}">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message[1] }}
+            </div>
+        {% endfor %}
+
+<body class="uk-height-1-1">
+
+    <div class="uk-background-cover uk-background-center-center uk-height-1-1 ev-section-padding-v-s uk-panel uk-flex uk-flex-wrap uk-flex-middle uk-flex-center uk-light" style="background-image: url(../static/assets/img/bg-img-1.jpg);">
+        <div class="uk-overlay ev-overlay-secondary uk-position-cover">
+            <ul id="test" class="uk-subnav uk-subnav-divider">
+                        <li class="locale" id="en" data-value="{{ url_for('set_locale', locale='en') }}"><a href="#">English</a></li>
+                        <li class="locale" id="zh" data-value="{{ url_for('set_locale', locale='zh') }}"><a href="#">简体中文</a></li>
+                        {{ _('%(test)s', test=test) }}
+            </ul>
+        </div>
+
+        <div class="ev-auth-2 uk-position-z-index">
+
+            <a href="/index">
+                <img class="ev-logo" src="../static/assets/img/logo.png">
+            </a>
+
+            <h5 class="uk-heading-line"><span>{{ _("Reset Password") }}</span></h5>
+
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+
+                <p>
+                    {{ form.v_code(class="uk-input uk-border-pill",placeholder=_("Verification Code")) }}
+
+			        {% for error in form.v_code.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+
+                <p>
+                    {{ form.new_password(class="uk-input uk-border-pill",placeholder=_("New Password")) }}
+
+			        {% for error in form.new_password.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+
+                <p>
+                    {{ form.new_password2(class="uk-input uk-border-pill",placeholder=_("Confirm New Password")) }}
+
+			        {% for error in form.new_password2.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+
+                <p>{{ form.submit(class="uk-button uk-width-1-1 uk-border-pill") }}</p>
+
+                <div class="uk-margin uk-width-1-1 uk-text-small">
+                    {{ _("Back to") }} <a class="ev-link-primary uk-text-bold" href="/login">{{ _("Sign In") }}</a>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+<script src="../static/assets/js/nice-select.min.js"></script>
+<script src="../static/assets/js/moment.min.js"></script>
+<script src="../static/assets/js/daterangepicker.js"></script>
+<script src="../static/assets/js/fontawesome.min.js"></script>
+<script src="../static/assets/js/main.js"></script>
+<script>
+    $(document).on('click', '.locale', function () {
+        var val = $(this).attr('data-value');
+        $.ajax({
+            url: val,
+            type: 'GET',
+            success: function (ret) {
+                console.log(ret);
+                location.reload();
+            }
+        })
+    });
+</script>
+{% endblock %}
+</body>
+
+</html>
